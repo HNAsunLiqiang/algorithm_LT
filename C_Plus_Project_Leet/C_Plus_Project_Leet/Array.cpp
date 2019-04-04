@@ -413,21 +413,23 @@ public:
         }
         return set[x];
     }
+    void unionSetWith(int x,int y){
+        if (find(x) == find(y)) {
+            return;
+        }
+        num --;
+        set[find(y)] = find(x);
+    }
     
 };
 
 int numIslandsWithUnionSet(vector<vector<char>>& grid) {
-    int count = 0;
     
-    for (int i = 0; i< grid[0].size(); i++) {
-        for (int j = 0; j< grid.size(); j++) {
-            if (grid[j][i] == '1') {
-                count ++;
-                isLandInfection(grid, i, j);
-            }
-        }
-    }
-    return count;
+    int row = grid.size();
+    int col = grid[0].size();
+    
+    
+    return 0;
 }
 
 
