@@ -408,11 +408,10 @@ class unionSet {
     
 public:
     int find(int x){
-        int parent = set[x];
-        while (parent != x) {
-            parent = find(parent);
+        if (set[x] != x) {
+            set[x] = find(set[x]);
         }
-        return parent;
+        return set[x];
     }
     
 };
