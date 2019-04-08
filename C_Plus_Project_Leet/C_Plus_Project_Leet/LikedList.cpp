@@ -56,3 +56,28 @@ ListNode* oddEvenList(ListNode* head) {
     return head;
     
 }
+
+// 206. Reverse Linked List
+ListNode* reverseList(ListNode* head) {
+    ListNode *cur = head;
+    ListNode *last = nullptr;
+    ListNode* next = nullptr;
+    
+    while (cur) {
+        next = cur->next;
+        cur->next = last;
+        last = cur;
+        cur = next;
+    }
+    return last;
+    //    if (head == null || head.next == null) return head;
+    //    ListNode p = reverseList(head.next);
+    //    head.next.next = head;
+    //    head.next = null;
+    //    return p;
+}
+
+// 92. Reverse Linked List II
+ListNode* reverseBetween(ListNode* head, int m, int n) {
+    
+}
