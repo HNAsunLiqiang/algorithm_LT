@@ -17,4 +17,5 @@ int findKthLargest(vector<int>& nums, int k) ;
 vector<int> maxSlidingWindow(vector<int>& nums, int k);
 vector<vector<int>> permute(vector<int>& nums) ;
 int numIslands(vector<vector<char>>& grid);
+int change(int amount, vector<int>& coins) ;
 #endif /* Array_hpp */

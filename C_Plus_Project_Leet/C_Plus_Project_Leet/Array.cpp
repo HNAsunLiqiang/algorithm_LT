@@ -11,6 +11,8 @@ using namespace std;
 #include <vector>
 #include "Array.hpp"
 #include <algorithm>
+#include <map>
+#include <ext/hash_map>
 
 void arrSwap(vector<int>& nums,int index1,int index2 ){
     int temp = nums[index1];
@@ -431,6 +433,82 @@ int numIslandsWithUnionSet(vector<vector<char>>& grid) {
     
     return 0;
 }
+
+// 322. Coin Change
+
+map<string, int> coinsmap;
+
+int coinsFormIndex(vector<int>& coins,int index,int amount){
+    
+    if (index == coins.size()) {
+        return amount == 0 ?1:0;
+    }
+    int res = 0;
+    
+    for (int zhang = 0; zhang*coins[index] <= amount; zhang++) {
+        string key = to_string(index+1) + "_" + to_string(amount-zhang*coins[index]);
+        if (coinsmap.count(key) != 0) {
+            res += coinsmap[key];
+        } else {
+            res += coinsFormIndex(coins, index+1, amount-zhang*coins[index] );
+        }
+    }
+    coinsmap[to_string(index) + "_" +  to_string(amount)] = res;
+    return res;
+}
+
+int change(int amount, vector<int>& coins) {
+    return coinsFormIndex(coins, 0, amount);
+}
+
+int dp_change(int amount, vector<int>& coins) {
+    if (amount == 0 && coins.size() == 0) {
+        return 1;
+    }
+    if (amount < 0 || coins.size() == 0) {
+        return 0;
+    }
+    int dp[coins.size()][amount+1];
+    memset(dp, 0, sizeof(dp));
+    for (int i = 0 ; i < coins.size() ; i++) {
+        dp[i][0] = 1;
+    }
+    for (int i = 0 ; i*coins[0] <= amount ; i++) {
+        dp[0][i*coins[0]] = 1;
+    }
+    for (int i = 1; i<coins.size(); i++) {
+        for (int j = 1; j<amount+1; j++) {
+            dp[i][j] = dp[i-1][j];
+            dp[i][j] += j-coins[i]>=0 ? dp[i][j-coins[i]] : 0;
+        }
+    }
+    return dp[coins.size()-1][amount];
+    
+}
+
+// 560. Subarray Sum Equals K
+int subArraySunRer(vector<int>& nums, int k,vector<int>& sums,int fromIndex){
+    if (fromIndex == nums.size()-1) {
+        sums.push_back(nums[nums.size()-1]);
+        if (nums[nums.size()-1] == k) {
+            return 1;
+        }
+        return 0;
+    }
+    int res = subArraySunRer(nums, k, sums,fromIndex+1);
+    for (int i = 0; i<sums.size(); i++) {
+        sums[i] += nums[fromIndex];
+        res += sums[i] == k ? 1 : 0;
+    }
+    res += nums[fromIndex] == k ? 1 : 0;
+    sums.push_back(nums[fromIndex]);
+    return res;
+}
+int subarraySum(vector<int>& nums, int k) {
+    vector<int> sums;
+    return subArraySunRer(nums, k, sums,0);
+}
+
 
 
 
