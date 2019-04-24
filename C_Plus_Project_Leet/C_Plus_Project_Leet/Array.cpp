@@ -12,6 +12,7 @@ using namespace std;
 #include "Array.hpp"
 #include <algorithm>
 #include <map>
+#include <unordered_map>
 #include <ext/hash_map>
 
 void arrSwap(vector<int>& nums,int index1,int index2 ){
@@ -486,7 +487,10 @@ int dp_change(int amount, vector<int>& coins) {
     
 }
 
+/********/
 // 560. Subarray Sum Equals K
+// slo1
+// 利用递归，求以每一个元素为开头的子数组的和。复杂度较高n^2，空间复杂度n。
 int subArraySunRer(vector<int>& nums, int k,vector<int>& sums,int fromIndex){
     if (fromIndex == nums.size()-1) {
         sums.push_back(nums[nums.size()-1]);
@@ -508,6 +512,29 @@ int subarraySum(vector<int>& nums, int k) {
     vector<int> sums;
     return subArraySunRer(nums, k, sums,0);
 }
+
+// slo2
+// unordered_map：相当于hash_map。插入效率高，查询效率1。
+// map:平和二叉树-红黑树，有序。插入效率低，查询效率logn。
+// 因为题意是求和为k的子数组个数，假设前m个数和为sum1，前n个数和为sum2，如果sum2-sum1 = k，那么以n结尾的子数组（m~n）和为k。利用这个公式，不必关系m~n范围以n结尾的每个子数组的和，只关心以m结尾子数组和，节省了遍历次数。利用unordered_map存储子数组和sum(key)出现的次数(value)。
+// 因为用map存储了出现和为sum的次数，所以避免了sol1中遍历子数组和的过程。
+int subarraySum2(vector<int>& nums, int k) {
+    unordered_map<int, int> sumsMap = {{0,1}};
+    int res = 0;
+    int sum = 0;
+    for (int i = 0; i<nums.size(); i++) {
+        sum += nums[i];
+        res += sumsMap[sum-k];
+        sumsMap[sum] += 1;
+    }
+    return res;
+}
+
+// 15. 3Sum
+vector<vector<int>> threeSum(vector<int>& nums) {
+
+}
+
 
 
 
