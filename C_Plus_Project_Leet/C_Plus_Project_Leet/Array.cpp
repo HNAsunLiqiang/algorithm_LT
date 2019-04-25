@@ -531,7 +531,37 @@ int subarraySum2(vector<int>& nums, int k) {
 }
 
 // 15. 3Sum
+// https://www.cnblogs.com/grandyang/p/4481576.html
+// https://blog.csdn.net/haolexiao/article/details/70768526
+// 先排序，从前往后遍历，遍历过程中m，固定一个数。找余下的两个数，查找过程和twosum相同。
+// 遍历求解过程，可以理解某个数为开头的答案。因为排序过了，所以去重后，不会再遍历到这个数。
 vector<vector<int>> threeSum(vector<int>& nums) {
+    
+    vector<vector<int>> res;
+    sort(nums.begin(), nums.end());
+    for (int k = 0; k < nums.size(); k++) {
+        // 去重
+        if (k > 0 && nums[k] == nums[k-1]) continue;
+        int i = k+1;
+        auto j = nums.size()-1;
+        int target = -nums[k];
+        while (i < j) {
+            if (nums[i] + nums[j] == target) {
+                res.push_back({nums[k],nums[i],nums[j]});
+                i++;
+                j--;
+                // 去重
+                while (i<j && nums[i] == nums[i-1]) i++;
+                while (i<j && nums[j] == nums[j+1]) j--;
+            } else if(nums[i] + nums[j] > target){
+                j--;
+            }else{
+                i++;
+            }
+        }
+    }
+    
+    return res;
 
 }
 
