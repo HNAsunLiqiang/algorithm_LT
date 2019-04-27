@@ -567,9 +567,24 @@ vector<vector<int>> threeSum(vector<int>& nums) {
 
 // 322. Coin Change
 
+void coinChangeRec(vector<int>& coins, int amount,int fromIndex,int *beforeZhang){
+    if (fromIndex == coins.size()) {
+        if (amount != 0) {
+            *beforeZhang = -1;
+        }
+    }
+    int res = 0;
+    for (int zhang = 0; zhang*coins[fromIndex] <= amount; zhang++) {
+        int zhang
+        res += coinChangeRec(coins, amount-zhang*coins[fromIndex], fromIndex+1,);
+    }
+    
+    return res;
+}
 int coinChange(vector<int>& coins, int amount) {
     
 }
+
 
 
 
