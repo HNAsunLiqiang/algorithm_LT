@@ -14,6 +14,8 @@ using namespace std;
 #include <map>
 #include <unordered_map>
 #include <ext/hash_map>
+#include <iostream>
+#include <iomanip>
 
 void arrSwap(vector<int>& nums,int index1,int index2 ){
     int temp = nums[index1];
@@ -567,23 +569,95 @@ vector<vector<int>> threeSum(vector<int>& nums) {
 
 // 322. Coin Change
 
-void coinChangeRec(vector<int>& coins, int amount,int fromIndex,int *beforeZhang){
-    if (fromIndex == coins.size()) {
-        if (amount != 0) {
-            *beforeZhang = -1;
+
+unordered_map<string, int> coinsChangeMap ;
+void coinChangeHelper(vector<int>& coins, int amount , int curIndex,int* minZhang,int curZhang) {
+    
+    if (amount == 0) {
+        *minZhang = min(*minZhang, curZhang);
+        return;
+    } else if(curIndex == -1){
+        return;
+    }
+    if (curZhang >= *minZhang) {
+        return;
+    }
+    for (int zhang = 0; zhang* coins[curIndex] <= amount; zhang++) {
+        
+        coinChangeHelper(coins, amount-zhang* coins[curIndex], curIndex-1, minZhang, curZhang+zhang);
+    }
+    
+}
+
+int coinChange(vector<int>& coins, int amount) {
+    sort(coins.begin(), coins.end());
+    int res = INT_MAX;
+    
+    coinChangeHelper(coins, amount, coins.size()-1, &res, 0);
+    
+    return res > amount ? -1 :res;
+}
+
+int coinChange_dp1(vector<int>& coins, int amount) {
+    
+    int dp[coins.size()][amount+1];
+    memset(dp, -1, sizeof(dp));
+    
+    for (int i = 0; i*coins[0] <= amount; i++) {
+        dp[0][i*coins[0]] = i;
+    }
+    for (int i = 1; i < coins.size(); i++) {
+        for (int j = 0; j < amount+1; j++) {
+            int minZhang = INT_MAX;
+            bool valid = false;
+            for (int zhang = 0; zhang* coins[i] <= j; zhang++) {
+                int preZhang = dp[i-1][j-zhang* coins[i]];
+                if (preZhang == -1) {
+                    continue;
+                }
+                valid = true;
+                minZhang = min(zhang + preZhang, minZhang);
+            }
+            dp[i][j] = valid ? minZhang : -1 ;
         }
     }
-    int res = 0;
-    for (int zhang = 0; zhang*coins[fromIndex] <= amount; zhang++) {
-        int zhang
-        res += coinChangeRec(coins, amount-zhang*coins[fromIndex], fromIndex+1,);
+    return dp[coins.size()-1][amount];
+}
+
+int coinChange_dp2(vector<int>& coins, int amount) {
+    
+    int dp[coins.size()][amount+1];
+    memset(dp, -1, sizeof(dp));
+    
+    for (int i = 0; i*coins[0] <= amount; i++) {
+        dp[0][i*coins[0]] = i;
+    }
+    for (int i = 0; i < coins.size(); i++) {
+        dp[i][0] = 0;
+    }
+    for (int i = 1; i < coins.size(); i++) {
+        for (int j = 1; j < amount+1; j++) {
+            
+            dp[i][j] = j-coins[i] >=0 ? (dp[i][j-coins[i]] == -1 ?INT_MAX:dp[i][j-coins[i]]+1) : INT_MAX;
+            dp[i][j] = min(dp[i-1][j], dp[i][j]);
+            
+        }
+    }
+    for (int i = 0; i<coins.size(); i++) {
+        cout << "\n";
+        cout << "换行";
+        for (int j = 0; j < amount+1; j++) {
+            
+            cout << dp[i][j];
+            cout << "  ";
+        }
     }
     
-    return res;
+    return dp[coins.size()-1][amount];
 }
-int coinChange(vector<int>& coins, int amount) {
-    
-}
+
+
+
 
 
 

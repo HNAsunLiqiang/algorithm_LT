@@ -18,4 +18,7 @@ vector<int> maxSlidingWindow(vector<int>& nums, int k);
 vector<vector<int>> permute(vector<int>& nums) ;
 int numIslands(vector<vector<char>>& grid);
 int change(int amount, vector<int>& coins) ;
+int coinChange(vector<int>& coins, int amount);
+int coinChange_dp1(vector<int>& coins, int amount);
+int coinChange_dp2(vector<int>& coins, int amount);
 #endif /* Array_hpp */
