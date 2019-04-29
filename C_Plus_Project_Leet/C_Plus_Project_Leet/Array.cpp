@@ -569,8 +569,10 @@ vector<vector<int>> threeSum(vector<int>& nums) {
 
 // 322. Coin Change
 
-
-unordered_map<string, int> coinsChangeMap ;
+// 递归解法
+// 数组先排序，从大-小取
+// 用minZhang记录当前取得的最小张数，递归过程如果>=minZhang，放弃本路径
+// 用递归查找每一条路径并记录需要的张数，当金额==0时，此路径成立，记录张数。
 void coinChangeHelper(vector<int>& coins, int amount , int curIndex,int* minZhang,int curZhang) {
     
     if (amount == 0) {
@@ -597,7 +599,9 @@ int coinChange(vector<int>& coins, int amount) {
     
     return res > amount ? -1 :res;
 }
-
+// 动态规划1
+// 思路类似找钱有多少种方案322. Coin Change
+// 第一行表示职用数组中第一个数去找钱，每个金额（列）需要的最小张数，那么第一行数据可求；第二行等于用数组中前两个数去找钱，那么第二行每个列的最小值=取第二张各种张数的情况下，所需的最小张数。
 int coinChange_dp1(vector<int>& coins, int amount) {
     
     int dp[coins.size()][amount+1];
@@ -623,7 +627,8 @@ int coinChange_dp1(vector<int>& coins, int amount) {
     }
     return dp[coins.size()-1][amount];
 }
-
+// 动归2
+// 是1的改进版，不必遍历下面一行的所有位置，h因为当前行的dp[i][j-coins[i]]已经计算过了除dp[i-1][j]的所有位置。
 int coinChange_dp2(vector<int>& coins, int amount) {
     
     int dp[coins.size()][amount+1];
@@ -637,21 +642,23 @@ int coinChange_dp2(vector<int>& coins, int amount) {
     }
     for (int i = 1; i < coins.size(); i++) {
         for (int j = 1; j < amount+1; j++) {
-            
-            dp[i][j] = j-coins[i] >=0 ? (dp[i][j-coins[i]] == -1 ?INT_MAX:dp[i][j-coins[i]]+1) : INT_MAX;
-            dp[i][j] = min(dp[i-1][j], dp[i][j]);
+            // j-coins[i] 即当前总金额减去当前票面额，就是少一张面值时候，所需的最小张数a。当前需张数=a+1
+            // 保证取得的结果为-1（无结果）或者正数(有结果)
+            dp[i][j] = j-coins[i] >=0 ? (dp[i][j-coins[i]] == -1 ? -1 :dp[i][j-coins[i]]+1) : -1;
+            // 因为 负数*正数 = 负数，此时需要保留正数，则取最大值； 否则保留负数（-1）；
+            dp[i][j] = dp[i-1][j]*dp[i][j] < 0 ? max(dp[i-1][j], dp[i][j]):min(dp[i-1][j], dp[i][j]);
             
         }
     }
-    for (int i = 0; i<coins.size(); i++) {
-        cout << "\n";
-        cout << "换行";
-        for (int j = 0; j < amount+1; j++) {
-            
-            cout << dp[i][j];
-            cout << "  ";
-        }
-    }
+//    for (int i = 0; i<coins.size(); i++) {
+//        cout << "\n";
+//        cout << "换行 ";
+//        for (int j = 0; j < amount+1; j++) {
+//
+//            cout << dp[i][j];
+//            cout << "  ";
+//        }
+//    }
     
     return dp[coins.size()-1][amount];
 }
