@@ -663,7 +663,47 @@ int coinChange_dp2(vector<int>& coins, int amount) {
     return dp[coins.size()-1][amount];
 }
 
-
+// 350. Intersection of Two Arrays II
+// 利用归并的merge过程，merge前提是排序数组，所以先sort
+vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+    sort(nums1.begin(), nums1.end());
+    sort(nums2.begin(), nums2.end());
+    vector<int> res;
+    int i = 0,j = 0;
+    while (i < nums1.size() && j < nums2.size()) {
+        if (nums1[i] == nums2[j]) {
+            res.push_back(nums1[i]);
+            i++;
+            j++;
+        } else {
+            nums1[i] < nums2[j] ? i++ : j++;
+        }
+    }
+    return res;
+}
+// 另一种 用map存储nums1中数字出现的次数，再遍历nums2，如果数字记录在map中，那么这个数字是重合z数字，此时需要把此数字计数-1。
+vector<int> intersect2(vector<int>& nums1, vector<int>& nums2) {
+    vector<int> ans;
+    unordered_map<int, int>hashmap;
+    if (nums1.size() < nums2.size()) swap(nums1, nums2);
+    
+    for (int i=0; i<nums1.size(); i++) {
+        if (hashmap.count(nums1[i]) <= 0)
+            hashmap.insert(make_pair(nums1[i], 1));
+        else
+            hashmap[nums1[i]] ++;
+    }
+    
+    for (int i=0; i<nums2.size(); i++) {
+        if (hashmap.count(nums2[i]) > 0 && hashmap[nums2[i]] > 0) {
+            ans.push_back(nums2[i]);
+            hashmap[nums2[i]] --;
+        }
+    }
+    
+    
+    return ans;
+}
 
 
 
