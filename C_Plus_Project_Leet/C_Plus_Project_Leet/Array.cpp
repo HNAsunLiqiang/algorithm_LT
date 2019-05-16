@@ -705,6 +705,24 @@ vector<int> intersect2(vector<int>& nums1, vector<int>& nums2) {
     return ans;
 }
 
+// 55. Jump Game
+// 从数组中每个位置出发能最多走的步数是arr[i]，问能否到达最后。
+// 遍历数组，设置一个最大到达数，如果之前位置的最大到达不能到达当前位置，那么更不能到达终点，返回false。再检查从这个位置出发能到达位置是否大于=最后索引。复杂度n
+bool canJump(vector<int>& nums) {
+    int maxReach = 0;
+    for (int i = 0; i<nums.size(); i++) {
+        if (maxReach < i) {
+            return false;
+        }
+        maxReach = max(maxReach, i+nums[i]);
+        if (maxReach >= nums.size()-1) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// 45. Jump Game II
 
 
 
