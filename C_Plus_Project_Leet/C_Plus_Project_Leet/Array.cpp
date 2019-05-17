@@ -723,7 +723,26 @@ bool canJump(vector<int>& nums) {
 }
 
 // 45. Jump Game II
-
+int jump(vector<int>& nums) {
+    
+    vector<int> setups;
+    setups.push_back(0);
+    for (int i = 0; i<nums.size(); i++) {
+        int nextReach = nums[i]+setups[i];
+        int curReach = setups.size()-1;
+        if (nextReach >= nums.size()-1) {
+            return setups[i]+1;
+        }
+        
+        if (curReach < nextReach) {
+            for (int j = 0; j < (nextReach - curReach); j++) {
+                setups.push_back(setups[i]+1);
+            }
+        }
+        
+    }
+    return setups.back();
+}
 
 
 
