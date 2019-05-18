@@ -348,6 +348,12 @@ vector<vector<int>> permute(vector<int>& nums) {
 //    Helper(ret, nums, 0);
 //    return ret;
 }
+// 固定一个位置，全排列排列它之后的位置
+// 排列中应该得到0位置的字母a，在0~n每个位置的各种排列情况
+// 用for循环来找出各种组合
+// 打印子序列是每个位置有包含和不包含两种情况，此题类似，每个位置的字母会被放到它之后的n个位置
+// 为什么只往后面for循环？因为index之前的交换情况由前面的数负责。
+// 第一层递归可以看成固定第一个数，第二d次递归看成固定第二个数，...。
 // 方法2 https://blog.csdn.net/summerxiachen/article/details/60579623
 //vector<vector<int> > permute(vector<int> &num) {
 //    vector<vector<int> > ret;
@@ -723,19 +729,26 @@ bool canJump(vector<int>& nums) {
 }
 
 // 45. Jump Game II
+// 从数组中每个位置出发能最多走的步数是arr[i]，问到达最后所需的最小步数。
+// 假设到i位置所需最小步数为n，a那么从i位置出发能能到的最大位置是i+arr[i]，到这些位置的可能步数是n+1步。怎么求到某位置的最小步数？第一次从左边某个位置x能到达当前位置，那么当前位置的最小步数就是到左边位置的最小步数+1。因为到x的步数肯定<=到i+1...的步数，所以x出发到这个位置就是这个位置的最小路径。
+// 用一个数组记录到每个位置所需的最小步数，便利过程更新能到达的最大位置，如果最大位置右扩，那么更填充右扩位置的步数，也就是当前位置最小步数+1步。
 int jump(vector<int>& nums) {
     
     vector<int> setups;
     setups.push_back(0);
     for (int i = 0; i<nums.size(); i++) {
-        int nextReach = nums[i]+setups[i];
+        int nextReach = nums[i]+i;
         int curReach = setups.size()-1;
+        if (curReach >= nums.size()-1) {
+            return setups[i];
+        }
         if (nextReach >= nums.size()-1) {
             return setups[i]+1;
         }
         
         if (curReach < nextReach) {
-            for (int j = 0; j < (nextReach - curReach); j++) {
+            int j = 0;
+            while (j < nextReach - curReach) {
                 setups.push_back(setups[i]+1);
             }
         }

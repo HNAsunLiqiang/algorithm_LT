@@ -21,4 +21,5 @@ int change(int amount, vector<int>& coins) ;
 int coinChange(vector<int>& coins, int amount);
 int coinChange_dp1(vector<int>& coins, int amount);
 int coinChange_dp2(vector<int>& coins, int amount);
+int jump(vector<int>& nums) ;
 #endif /* Array_hpp */
