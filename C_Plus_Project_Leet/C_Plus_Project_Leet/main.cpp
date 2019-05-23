@@ -64,9 +64,12 @@ int main(int argc, const char * argv[]) {
 //    numIslands(grid);
 //    vector<string> res = generateParenthesis(3);
     
-    vector<int> nums4 = {
-        2,5,10,1};
+//    vector<int> nums4 = {
+//        1,2,1,1,1};
     
 //    int res = change(11, nums4);
-    int res = coinChange_dp2(nums4, 27);
+//    int res = jump(nums4);
+    
+    lengthOfLongestSubstring("abba");
+    
 }

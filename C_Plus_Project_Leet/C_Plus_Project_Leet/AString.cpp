@@ -10,6 +10,7 @@ using namespace std;
 #include "AString.hpp"
 
 #include <vector>
+#include <unordered_map>
 
 vector<int> getNext(string str) {
     vector<int> next;
@@ -220,6 +221,23 @@ string longestPalindrome(string s) {
     
 }
 
+// 3. Longest Substring Without Repeating Characters
 
+int lengthOfLongestSubstring(string s) {
+    unordered_map<char, int> indexMap;
+    int left = 0,right = 0;
+    int res = 0;
+    while (right < s.size()) {
+        if (indexMap.find(s[right]) == indexMap.end()) {
+            indexMap[s[right]] = right;
+            right++;
+            res = max(right-left, res);
+        } else {
+            left = indexMap[s[right]]+1;
+            indexMap.erase(s[right]);
+        }
+    }
+    return res;
+}
 
 
