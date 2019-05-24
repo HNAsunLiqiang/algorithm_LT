@@ -222,7 +222,8 @@ string longestPalindrome(string s) {
 }
 
 // 3. Longest Substring Without Repeating Characters
-
+// 求最大无重复字符子串长度
+// 快慢指针left、right。 用map记录是否出现过，key-字符 value-索引。若字符x在map中，移动left到上一个x出现位置的下一位m，并移除left-m范围的缓存；否则记录当前字符。
 int lengthOfLongestSubstring(string s) {
     unordered_map<char, int> indexMap;
     int left = 0,right = 0;
@@ -233,11 +234,26 @@ int lengthOfLongestSubstring(string s) {
             right++;
             res = max(right-left, res);
         } else {
-            left = indexMap[s[right]]+1;
-            indexMap.erase(s[right]);
+            int nextLeft = indexMap[s[right]]+1;
+            while (left < nextLeft) {
+                indexMap.erase(s[left++]);
+            }
         }
     }
     return res;
+}
+// 若有重复字符最大长度出现在两个相同字符之间或首尾。
+// asii码最大长度为256，用256的数组记录遍历过程中字符最后一次出现的位置。
+int lengthOfLongestSubstring1(string s) {
+    vector<int> dict(256, -1);
+    int maxLen = 0, start = -1;
+    for (int i = 0; i != s.length(); i++) {
+        if (dict[s[i]] > start)// 出现了重复字符，如果此字符上一个位置比start大，那么start = 这个字符出现的上一次位置，即把start向后推
+            start = dict[s[i]];
+        dict[s[i]] = i;// 更新字符最后一次出现的位置
+        maxLen = max(maxLen, i - start);
+    }
+    return maxLen;
 }
 
 
