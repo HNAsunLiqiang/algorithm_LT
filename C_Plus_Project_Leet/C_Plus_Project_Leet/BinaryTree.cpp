@@ -255,6 +255,33 @@ using namespace std;
 //    return result;
 //}
 
+
+void morrisPreTraversal(TreeNode* head) {
+    
+    TreeNode *cur = head;
+    
+    while (cur) {
+        if (cur->left) {
+            TreeNode *mostRight = cur->left;
+            while (mostRight->right != NULL && mostRight->right != cur) {
+                mostRight = mostRight->right;
+            }
+            if (mostRight->right == NULL) {
+                mostRight->right = cur;
+                cur = cur->left;
+            } else if(mostRight->right == cur) {
+                cur = mostRight->right;
+                mostRight->right = NULL;
+                cur = cur-> right;
+            }
+            
+        } else {
+            cur = cur-> right;
+        }
+    }
+    
+}
+
 // 333. Largest BST Subtree
 
 struct returnData {
