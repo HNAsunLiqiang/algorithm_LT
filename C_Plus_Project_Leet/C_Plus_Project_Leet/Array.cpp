@@ -771,6 +771,36 @@ int maxArea(vector<int>& height) {
     return maxAr;
 }
 
+// 42. Trapping Rain Water https://leetcode.com/problems/trapping-rain-water/submissions/
+// 给定n个非负整数表示每个柱的宽度为1的高程图，计算下雨后能够捕获的水量。
+// 每个位置能存储的水平 = min(当前位置左边的最大高度,当前位置右边的最大高度) - 当前位置高。
+// 利用动态规划，当前位置i左边最大高度 maxLeft(i) = max(maxLeft(i-1), height[i])；右边同理
+// 复杂度n
+int trap(vector<int>& height) {
+    if (height.size() < 3) {
+        return 0;
+    }
+    int trapSize = 0;
+    vector<int> leftMaxIndex(height.size(),0);
+    vector<int> rightMaxIndex(height.size(),0);
+    int i = 1;
+    while (i < height.size()) {
+        leftMaxIndex[i] = height[leftMaxIndex[i-1]] > height[i] ? leftMaxIndex[i-1] : i;
+        i++;
+    }
+    rightMaxIndex[height.size()-1] = height.size()-1;
+    i = height.size()-2;
+    while (i > -1) {
+        rightMaxIndex[i] = height[rightMaxIndex[i+1]] > height[i] ? rightMaxIndex[i+1] : i;
+        i--;
+    }
+    i = 1;
+    while (i < height.size() - 1) {
+        trapSize += abs(min(height[leftMaxIndex[i]], height[rightMaxIndex[i]])) - height[i] ;
+        i++;
+    }
+    return trapSize;
+}
 
 
 

@@ -70,6 +70,10 @@ int main(int argc, const char * argv[]) {
 //    int res = change(11, nums4);
 //    int res = jump(nums4);
     
-    lengthOfLongestSubstring("abba");
+//    lengthOfLongestSubstring("abba");
+    
+    vector<int> case1 = {0,1,0,2,1,0,1,3,2,1,2,1};
+    
+    trap(case1);
 
 }
