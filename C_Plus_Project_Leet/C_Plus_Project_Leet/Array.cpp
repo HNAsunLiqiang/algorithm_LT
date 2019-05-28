@@ -758,8 +758,17 @@ int jump(vector<int>& nums) {
 }
 
 // 11. Container With Most Water
+// 水池的最大储水量
+// 利用双指针夹逼：移动较短的索引。为什么移动短的？因为水池高度由短木板决定，所以如果移动高的因为i~j减小，并且木板水池高度不可能高于未移动的矮的木板，所以此时，总储量只能减小，所以移动高的没有意义。
+// 为什么这样一定能取到最大值？先分析什么情况会错过最大值，假设i1,j1时存储量最大，为maxArea。也就是一个过了最大值位置，一个还未到时候，肯定会错过最大值。证明L：i和j肯定有一个先到i1或j1，假设i先到i1，因为此时是存储量最大值，如果i会向右移动，那么此时肯定是j位置高度大于i1位置，此种情况底边更长，所以面积大于此前假设maxArea，与假设不符，所以这时候只能是j左移一直移动到j1。综上，此过程肯定能取得最大值。
 int maxArea(vector<int>& height) {
-    
+    int i = 0,j = height.size()-1;
+    int maxAr = 0;
+    while (i < j) {
+        maxAr = max(maxAr, min(height[i], height[j])*(j-i));
+        height[i] < height[j] ? i++ : j--;
+    }
+    return maxAr;
 }
 
 
