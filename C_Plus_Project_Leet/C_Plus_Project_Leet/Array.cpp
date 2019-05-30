@@ -801,6 +801,52 @@ int trap(vector<int>& height) {
     }
     return trapSize;
 }
+int trap1(vector<int>& height)
+{
+    if(!height.size()) return 0;
+    
+    int l = 0, r = height.size()-1;
+    int secHighest = 0;
+    int area = 0;
+    
+    while(l < r)
+    {
+        if(height[l] < height[r])
+        {
+            secHighest = std::max(secHighest, height[l]);
+            area += secHighest - height[l];
+            l++;
+        }
+        else
+        {
+            secHighest = std::max(secHighest, height[r]);
+            area += secHighest - height[r];
+            r--;
+        }
+    }
+    
+    return area;
+}
+
+// 78. Subsets
+// 每个位置有两个路径：1、加上当前数；2、不加。当到最后时候，加入结果集合。
+void subsetProcess(vector<vector<int>> &res,vector<int>& nums,int from,vector<int>& cur){
+    if (from == nums.size()) {
+        res.push_back(cur);
+        return;
+    }
+    vector<int> v(cur);
+    subsetProcess(res, nums, from+1,v);
+    cur.push_back(nums[from]);
+    subsetProcess(res, nums, from+1,cur);
+}
+
+vector<vector<int>> subsets(vector<int>& nums) {
+    vector<vector<int>> res;
+    vector<int> cur;
+    subsetProcess(res,nums, 0,cur);
+    return res;
+}
 
 
 
