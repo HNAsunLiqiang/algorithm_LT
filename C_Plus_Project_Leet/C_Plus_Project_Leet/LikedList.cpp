@@ -88,3 +88,40 @@ ListNode* reverseList(ListNode* head) {
 //    }
 //
 //}
+
+// 19. Remove Nth Node From End of List
+// 移除倒数第n个节点
+// 便利一遍的方法。两个指针,cur、pre，cur先走n步。然后pre和cur一起走，当cur到最后一个时候，pre来到了移除节点的前一个。
+ListNode* removeNthFromEnd(ListNode* head, int n) {
+//    int index = 1;
+//    ListNode *firstNode = head;
+//    while (firstNode->next) {
+//        firstNode = firstNode->next;
+//        index ++;
+//    }
+//
+//    index = index-n;
+//    if (index == 0) {
+//        return head->next;
+//    }
+//    ListNode *preNode = head;
+//    ListNode *nNode = head;
+//    while (index > 0) {
+//        nNode = nNode ->next;
+//        index --;
+//        if (index == 1) preNode = nNode;
+//    }
+//    preNode->next = nNode->next;
+//    return head;
+    
+    if (!head->next) return NULL;
+    ListNode *pre = head, *cur = head;
+    for (int i = 0; i < n; ++i) cur = cur->next;
+    if (!cur) return head->next;
+    while (cur->next) {
+        cur = cur->next;
+        pre = pre->next;
+    }
+    pre->next = pre->next->next;
+    return head;
+}
