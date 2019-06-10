@@ -349,9 +349,11 @@ vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
         int size = queue.size();
         int curIndex = 0;
         vector<int> row(size);
-        while (size > 0) {
+        while (curIndex < size) {
             if (isLeftToRight) {
-                row[]
+                row[curIndex] = queue.front()->val;
+            } else {
+                row[size-curIndex-1] = queue.front()->val;
             }
             if (queue.front()->left) {
                 queue.push(queue.front()->left);
@@ -359,6 +361,8 @@ vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
             if (queue.front()->right) {
                 queue.push(queue.front()->right);
             }
+            queue.pop();
+            isLeftToRight = !isLeftToRight;
         }
     }
     
