@@ -340,8 +340,10 @@ isBReturnData isBProcess(TreeNode* node) {
 
 
 // 103. Binary Tree Zigzag Level Order Traversal
+// 之字形层序遍历：还是用队列来层序遍历。设置一个标记表示该层是左-右还是右-左，初始化一个每层大小的数组，如果左到右就从左侧开始添加数据，反之相反。
 vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
     vector<vector<int>> res;
+    if (!root) return res;
     queue<TreeNode*>queue;
     queue.push(root);
     bool isLeftToRight = true;
@@ -362,8 +364,10 @@ vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
                 queue.push(queue.front()->right);
             }
             queue.pop();
-            isLeftToRight = !isLeftToRight;
+            curIndex++;
         }
+        isLeftToRight = !isLeftToRight;
+        res.push_back(row);
     }
     
     return res;
