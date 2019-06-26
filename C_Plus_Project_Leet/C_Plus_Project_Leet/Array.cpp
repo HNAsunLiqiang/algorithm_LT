@@ -558,7 +558,7 @@ vector<vector<int>> threeSum(vector<int>& nums) {
                 res.push_back({nums[k],nums[i],nums[j]});
                 i++;
                 j--;
-                // 去重
+                // 跳过重复数字
                 while (i<j && nums[i] == nums[i-1]) i++;
                 while (i<j && nums[j] == nums[j+1]) j--;
             } else if(nums[i] + nums[j] > target){

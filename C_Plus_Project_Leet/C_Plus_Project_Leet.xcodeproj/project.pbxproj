@@ -11,6 +11,7 @@
 		0E0852BF221D6FD3002B75B0 /* LikedList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E0852BD221D6FD3002B75B0 /* LikedList.cpp */; };
 		0E0852C2221ED158002B75B0 /* BinaryTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E0852C0221ED158002B75B0 /* BinaryTree.cpp */; };
 		0E3438062244EC7900BDE966 /* Others.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E3438042244EC7900BDE966 /* Others.cpp */; };
+		0E6C4A6922C373DF00B08F91 /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E6C4A6722C373DF00B08F91 /* Matrix.cpp */; };
 		0EA9150422240E42007FC8D6 /* DynamicP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9150222240E42007FC8D6 /* DynamicP.cpp */; };
 		0EE76E4921FF20F00030F734 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EE76E4821FF20F00030F734 /* main.cpp */; };
 		0EE76E5121FF21460030F734 /* InorerBinaryTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EE76E4F21FF21460030F734 /* InorerBinaryTree.cpp */; };
@@ -38,6 +39,8 @@
 		0E0852C1221ED158002B75B0 /* BinaryTree.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BinaryTree.hpp; sourceTree = "<group>"; };
 		0E3438042244EC7900BDE966 /* Others.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Others.cpp; sourceTree = "<group>"; };
 		0E3438052244EC7900BDE966 /* Others.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Others.hpp; sourceTree = "<group>"; };
+		0E6C4A6722C373DF00B08F91 /* Matrix.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
+		0E6C4A6822C373DF00B08F91 /* Matrix.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Matrix.hpp; sourceTree = "<group>"; };
 		0EA9150222240E42007FC8D6 /* DynamicP.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DynamicP.cpp; sourceTree = "<group>"; };
 		0EA9150322240E42007FC8D6 /* DynamicP.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DynamicP.hpp; sourceTree = "<group>"; };
 		0EE76E4521FF20F00030F734 /* C_Plus_Project_Leet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = C_Plus_Project_Leet; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +94,8 @@
 				0EA9150322240E42007FC8D6 /* DynamicP.hpp */,
 				0E00AC36222FCEC000761D22 /* AString.cpp */,
 				0E00AC37222FCEC000761D22 /* AString.hpp */,
+				0E6C4A6722C373DF00B08F91 /* Matrix.cpp */,
+				0E6C4A6822C373DF00B08F91 /* Matrix.hpp */,
 				0E3438042244EC7900BDE966 /* Others.cpp */,
 				0E3438052244EC7900BDE966 /* Others.hpp */,
 			);
@@ -156,6 +161,7 @@
 				0E3438062244EC7900BDE966 /* Others.cpp in Sources */,
 				0EE76E4921FF20F00030F734 /* main.cpp in Sources */,
 				0E00AC38222FCEC000761D22 /* AString.cpp in Sources */,
+				0E6C4A6922C373DF00B08F91 /* Matrix.cpp in Sources */,
 				0EE76E5121FF21460030F734 /* InorerBinaryTree.cpp in Sources */,
 				0EA9150422240E42007FC8D6 /* DynamicP.cpp in Sources */,
 				0EE76E54220427E90030F734 /* Array.cpp in Sources */,
