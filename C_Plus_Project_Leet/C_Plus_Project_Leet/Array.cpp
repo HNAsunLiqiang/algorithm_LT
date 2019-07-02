@@ -861,6 +861,7 @@ void sortColors(vector<int>& nums) {
         }else if (nums[i] == 0){
             swap75(nums, ++left, i++);
         }else {
+            // 交换到较大区的时候，当前索引i不增加，因为此时从较大区被交换过来的数没有验证过大小
             swap75(nums, --right, i);
         }
     }
