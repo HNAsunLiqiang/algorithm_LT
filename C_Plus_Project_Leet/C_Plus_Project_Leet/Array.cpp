@@ -848,7 +848,29 @@ vector<vector<int>> subsets(vector<int>& nums) {
     return res;
 }
 
+// 75. Sort Colors
+// 数组中有三种数，0、1、2，个数不固定，按0、1、2的顺序排序，要求只遍历一次。
+// 利用快排的partation过程，把1当成分割数，0方左边，2放右边。
+// 三个指针一个h是遍历用的i，一个是left-左边界-指向小于1的最后一个数，一个是right-右边界-指向大于1的第一个数。
+void swap75(vector<int>& nums,int index1,int index2);
+void sortColors(vector<int>& nums) {
+    int i = 0,left =-1,right = nums.size();
+    while (i < right) {
+        if (nums[i] == 1) {
+            i += 1;
+        }else if (nums[i] == 0){
+            swap75(nums, ++left, i++);
+        }else {
+            swap75(nums, --right, i);
+        }
+    }
+}
 
+void swap75(vector<int>& nums,int index1,int index2){
+    int temp = nums[index1];
+    nums[index1] = nums[index2];
+    nums[index2] = temp;
+}
 
 
 
