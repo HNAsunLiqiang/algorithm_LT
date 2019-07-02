@@ -64,7 +64,7 @@ bool isValidSudoku(vector<vector<char>>& board) {
     }
     return true;
 }
-// 才用一个set和编码的方式来唯一记录一个位置的元素是否出现过。如第一行出行的3记录为“1（3）”，
+// 利用一个set数据结构和“编码”的方式来唯一记录一个位置的元素是否出现过。如第一行出行的3记录为“1（3）”，
 //1、set和hashset都不允许元素重复，但是set是有序的，hashset无顺序，所以向set插入元素必须重载<操作符比较大小，而hashset只需重载equal()，比较是否相等即可。
 // 2、set底层数据结构为红黑树，索引时间为log(n)，而hashset基于哈希表，比set要快一些，log(1)。
 // https://leetcode.com/problems/valid-sudoku/discuss/15472/Short%2BSimple-Java-using-Strings
