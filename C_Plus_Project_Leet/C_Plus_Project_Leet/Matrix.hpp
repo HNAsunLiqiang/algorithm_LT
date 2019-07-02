@@ -10,5 +10,8 @@
 #define Matrix_hpp
 
 #include <stdio.h>
+#include <vector>
+
+bool isValidSudoku(vector<vector<char>>& board);
 
 #endif /* Matrix_hpp */
