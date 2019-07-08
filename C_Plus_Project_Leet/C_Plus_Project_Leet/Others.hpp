@@ -14,5 +14,6 @@ using namespace std;
 
 
 vector<string> generateParenthesis(int n) ;
+vector<string> letterCombinations(string digits);
 
 #endif /* Others_hpp */
