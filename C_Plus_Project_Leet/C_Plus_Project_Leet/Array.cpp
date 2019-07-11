@@ -16,6 +16,8 @@ using namespace std;
 #include <ext/hash_map>
 #include <iostream>
 #include <iomanip>
+#include <set>
+#include <queue>
 
 void arrSwap(vector<int>& nums,int index1,int index2 ){
     int temp = nums[index1];
@@ -871,6 +873,76 @@ void swap75(vector<int>& nums,int index1,int index2){
     int temp = nums[index1];
     nums[index1] = nums[index2];
     nums[index2] = temp;
+}
+
+
+
+// 347. Top K Frequent Elements
+//vector<int> topKFrequent(vector<int>& nums, int k) {
+//    vector<int> result;
+//    unordered_map<int, int> fmap;
+//    vector<set<int>> buckets;
+//    for (int i = 0 ; i< nums.size(); ++i) {
+//        set<int> bucket;
+//        buckets.push_back(bucket);
+//    }
+//    for (int j = 0 ; j< nums.size(); ++j) {
+//        if (fmap.count(nums[j]) == 0) {
+//            fmap[nums[j]] = 1;
+//        }else {
+//            buckets[fmap[nums[j]]].erase(nums[j]);
+//            fmap[nums[j]] += 1;
+//            buckets[fmap[nums[j]]].insert(nums[j]);
+//        }
+//    }
+//
+//    for (int i = buckets.size()-1; i >= 0; i--) {
+//        set<int> bucket = buckets[i];
+//        for (int num:bucket) {
+//            result.push_back(num);
+//        }
+//        if (result.size() >= k) {
+//            break;
+//        }
+//    }
+//    return  result;
+//}
+struct NumberNode {
+    int num,f;
+    NumberNode(int a = 0,int b = 0):num(a),f(b){
+    }
+};
+
+struct cmp {
+    bool operator()(NumberNode a,NumberNode b){
+        return a.f < b.f;
+    }
+};
+
+vector<int> topKFrequent(vector<int>& nums, int k) {
+    vector<int> result;
+    priority_queue<NumberNode,vector<NumberNode>,cmp> q;
+    unordered_map<int, NumberNode> fmap;
+    for (int j = 0 ; j< nums.size(); ++j) {
+        if (fmap.count(nums[j]) == 0) {
+            NumberNode node = NumberNode(nums[j], 1);
+            fmap[nums[j]] = node;
+//            q.push(node);
+        }else {
+            NumberNode node = fmap[nums[j]];
+            node.f += 1;
+        }
+    }
+    
+    for(unordered_map<int,NumberNode>::iterator iter=fmap.begin(); iter != fmap.end(); iter++){
+        q.push(iter -> second);
+    }
+    while (result.size() < k) {
+        result.push_back(q.top().num);
+        q.pop();
+    }
+    
+    return  result;
 }
 
 

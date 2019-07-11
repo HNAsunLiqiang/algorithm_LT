@@ -90,6 +90,8 @@ int main(int argc, const char * argv[]) {
 //    };
 //    bool isa = isValidSudoku(sudo);
 
-    vector<string> res = letterCombinations("23");
+//    vector<string> res = letterCombinations("23");
     
+    vector<int> case2 = {1,1,1,2,2,3};
+    topKFrequent(case2, 2);
 }

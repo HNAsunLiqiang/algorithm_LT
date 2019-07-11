@@ -23,4 +23,5 @@ int coinChange_dp1(vector<int>& coins, int amount);
 int coinChange_dp2(vector<int>& coins, int amount);
 int jump(vector<int>& nums) ;
 int trap(vector<int>& height) ;
+vector<int> topKFrequent(vector<int>& nums, int k) ;
 #endif /* Array_hpp */
