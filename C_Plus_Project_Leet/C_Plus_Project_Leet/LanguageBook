@@ -1,0 +1,20 @@
+
+1、 遍历unorder_map的方法
+unordered_map<int, int> m;
+1.for (auto p : m)
+buckets[p.second].push_back(p.first);
+
+2.for(auto it = map.begin(); it != map.end(); it++){
+// make_pair 第一个参数在排序中有更高的优先级
+pq.push(make_pair(it->second, it->first));
+// 当队列中的元素个数大于n-k个时候，pq.top数据为肯定是前k个中的，开始收集结果
+if(pq.size() > (int)map.size() - k){
+res.push_back(pq.top().second);
+pq.pop();
+}
+}
+
+2、make_pair和priority_queue
+priority_queue<pair<int,int>> pq;
+  //默认是大根堆，按a排序
+pq.push(make_pair(a, b));

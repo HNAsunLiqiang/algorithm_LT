@@ -40,6 +40,7 @@
 		0E3438042244EC7900BDE966 /* Others.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Others.cpp; sourceTree = "<group>"; };
 		0E3438052244EC7900BDE966 /* Others.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Others.hpp; sourceTree = "<group>"; };
 		0E3AAC0622D352AE0006D963 /* table */ = {isa = PBXFileReference; lastKnownFileType = text; path = table; sourceTree = "<group>"; };
+		0E3AAC2F22D859D60006D963 /* LanguageBook */ = {isa = PBXFileReference; lastKnownFileType = text; path = LanguageBook; sourceTree = "<group>"; };
 		0E6C4A6722C373DF00B08F91 /* Matrix.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
 		0E6C4A6822C373DF00B08F91 /* Matrix.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Matrix.hpp; sourceTree = "<group>"; };
 		0EA9150222240E42007FC8D6 /* DynamicP.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DynamicP.cpp; sourceTree = "<group>"; };
@@ -84,6 +85,7 @@
 			children = (
 				0EE76E4821FF20F00030F734 /* main.cpp */,
 				0E3AAC0622D352AE0006D963 /* table */,
+				0E3AAC2F22D859D60006D963 /* LanguageBook */,
 				0EE76E4F21FF21460030F734 /* InorerBinaryTree.cpp */,
 				0EE76E5021FF21460030F734 /* InorerBinaryTree.hpp */,
 				0EE76E52220427E90030F734 /* Array.cpp */,

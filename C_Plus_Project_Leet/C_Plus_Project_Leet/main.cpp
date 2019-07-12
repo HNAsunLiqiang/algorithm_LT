@@ -92,6 +92,14 @@ int main(int argc, const char * argv[]) {
 
 //    vector<string> res = letterCombinations("23");
     
-    vector<int> case2 = {1,1,1,2,2,3};
-    topKFrequent(case2, 2);
+//    vector<int> case2 = {-1,-1};
+//    topKFrequent(case2, 1);
+    
+    
+    
+//    vector<int> v1;
+//    vector<int> *v2 = &v1;
+//    cout << "v1 -- " <<&v1 << endl;
+//    cout << "\n" ;
+//    cout << "v2 --" << v2 << endl;
 }

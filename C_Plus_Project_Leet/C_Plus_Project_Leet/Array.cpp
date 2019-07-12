@@ -878,73 +878,54 @@ void swap75(vector<int>& nums,int index1,int index2){
 
 
 // 347. Top K Frequent Elements
-//vector<int> topKFrequent(vector<int>& nums, int k) {
-//    vector<int> result;
-//    unordered_map<int, int> fmap;
-//    vector<set<int>> buckets;
-//    for (int i = 0 ; i< nums.size(); ++i) {
-//        set<int> bucket;
-//        buckets.push_back(bucket);
-//    }
-//    for (int j = 0 ; j< nums.size(); ++j) {
-//        if (fmap.count(nums[j]) == 0) {
-//            fmap[nums[j]] = 1;
-//        }else {
-//            buckets[fmap[nums[j]]].erase(nums[j]);
-//            fmap[nums[j]] += 1;
-//            buckets[fmap[nums[j]]].insert(nums[j]);
-//        }
-//    }
-//
-//    for (int i = buckets.size()-1; i >= 0; i--) {
-//        set<int> bucket = buckets[i];
-//        for (int num:bucket) {
-//            result.push_back(num);
-//        }
-//        if (result.size() >= k) {
-//            break;
-//        }
-//    }
-//    return  result;
-//}
-struct NumberNode {
-    int num,f;
-    NumberNode(int a = 0,int b = 0):num(a),f(b){
-    }
-};
+// 求数组中出行最频繁的前k个数
+// 两种做法：1、桶+map 2、优先级队列+map
 
-struct cmp {
-    bool operator()(NumberNode a,NumberNode b){
-        return a.f < b.f;
+// 遍历一次存到map中：key-数，value-次数
+// 再遍历map，将次数和数字组成pair放入priority_queue，组成大根堆
+// 当priority_queue中元素大于n-k个时候，开始收集数据
+vector<int> topKFrequent1(vector<int>& nums, int k) {
+    unordered_map<int,int> map;
+    for(int num : nums){
+        map[num]++;
     }
-};
-
-vector<int> topKFrequent(vector<int>& nums, int k) {
-    vector<int> result;
-    priority_queue<NumberNode,vector<NumberNode>,cmp> q;
-    unordered_map<int, NumberNode> fmap;
-    for (int j = 0 ; j< nums.size(); ++j) {
-        if (fmap.count(nums[j]) == 0) {
-            NumberNode node = NumberNode(nums[j], 1);
-            fmap[nums[j]] = node;
-//            q.push(node);
-        }else {
-            NumberNode node = fmap[nums[j]];
-            node.f += 1;
+    
+    vector<int> res;
+    // pair<first, second>: first is frequency,  second is number
+    priority_queue<pair<int,int>> pq;
+    for(auto it = map.begin(); it != map.end(); it++){
+        // make_pair 第一个参数在排序中有更高的优先级
+        pq.push(make_pair(it->second, it->first));
+        // 当队列中的元素个数大于n-k个时候，pq.top数据为肯定是前k个中的，开始收集结果
+        if(pq.size() > (int)map.size() - k){
+            res.push_back(pq.top().second);
+            pq.pop();
         }
     }
-    
-    for(unordered_map<int,NumberNode>::iterator iter=fmap.begin(); iter != fmap.end(); iter++){
-        q.push(iter -> second);
-    }
-    while (result.size() < k) {
-        result.push_back(q.top().num);
-        q.pop();
-    }
-    
-    return  result;
+    return res;
 }
-
+// 生成n个桶
+// 遍历一次存到map中：key-数，value-次数
+// 再遍历map，以alue为索引把数字放入响应的桶中,再逆序遍历桶，取出k个数
+vector<int> topKFrequent2(vector<int>& nums, int k) {
+    unordered_map<int, int> m;
+    for (int num : nums)
+        ++m[num];
+    // 不必显式插入初始化的数组
+    vector<vector<int>> buckets(nums.size() + 1);
+    for (auto p : m)
+        buckets[p.second].push_back(p.first);
+    
+    vector<int> ans;
+    for (int i = buckets.size() - 1; i >= 0 && ans.size() < k; --i) {
+        for (int num : buckets[i]) {
+            ans.push_back(num);
+            if (ans.size() == k)
+                break;
+        }
+    }
+    return ans;
+}
 
 
 
