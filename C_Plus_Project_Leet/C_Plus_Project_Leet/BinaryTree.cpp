@@ -372,3 +372,16 @@ vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
     
     return res;
 }
+
+// 105. Construct Binary Tree from Preorder and Inorder Traversal
+
+TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+    TreeNode* root = new TreeNode(preorder[0]);
+    
+    
+    return root;
+}
+
+void root(TreeNode* father,vector<int>& left, vector<int>& right){
+    
+}
