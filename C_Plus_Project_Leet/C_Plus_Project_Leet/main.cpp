@@ -51,6 +51,8 @@ int main(int argc, const char * argv[]) {
     vector<char> nums2 = {'0','0','1'};
     vector<char> nums3 = {'1','0','0'};
     
+    
+    
 //    nums.insert(nums.begin()+0, 1);
     
 //    sort(nums.begin(), nums.begin()+8);
@@ -102,4 +104,9 @@ int main(int argc, const char * argv[]) {
 //    cout << "v1 -- " <<&v1 << endl;
 //    cout << "\n" ;
 //    cout << "v2 --" << v2 << endl;
+    
+    vector<int> preorder = {3,9,20,15,7};
+    vector<int> inorder = {9,3,15,20,7};
+    
+    buildTree(preorder, inorder);
 }

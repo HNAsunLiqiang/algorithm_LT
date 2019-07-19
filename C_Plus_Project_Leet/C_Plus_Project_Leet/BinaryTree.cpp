@@ -374,14 +374,35 @@ vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
 }
 
 // 105. Construct Binary Tree from Preorder and Inorder Traversal
-
+void construct(TreeNode* root,vector<int>& preorder, vector<int>& inorder);
 TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-    TreeNode* root = new TreeNode(preorder[0]);
+    TreeNode *root = new TreeNode(preorder[0]);
     
-    
+    construct(root, preorder, inorder);
     return root;
 }
 
-void root(TreeNode* father,vector<int>& left, vector<int>& right){
-    
+void construct(TreeNode* root,vector<int>& preorder, vector<int>& inorder){
+    vector<int> inOrderleft,inOrderright;
+    bool beforeRoot = true;
+    for (int i = 0; i<inorder.size(); i++) {
+        if (inorder[i] == root->val) {
+            beforeRoot = false;
+            continue;
+        }
+        if (beforeRoot) inOrderleft.push_back(inorder[i]);
+        if (!beforeRoot) inOrderright.push_back(inorder[i]);
+    }
+    if (inOrderleft.size() != 0) {
+        TreeNode *childL = new TreeNode(preorder[1]);
+        root->left = childL;
+        vector<int> preorderLeft(preorder.begin()+1,preorder.begin()+1+inOrderleft.size());
+        construct(childL, preorderLeft, inOrderleft);
+    }
+    if (inOrderright.size() != 0) {
+        TreeNode *childR = new TreeNode(preorder[1+inOrderleft.size()]);
+        root->right = childR;
+        vector<int> preorderRight(preorder.begin()+1+inOrderleft.size(),preorder.end());
+        construct(childR, preorderRight, inOrderright);
+    }
 }
