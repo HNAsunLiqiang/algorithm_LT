@@ -374,8 +374,13 @@ vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
 }
 
 // 105. Construct Binary Tree from Preorder and Inorder Traversal
+// 用出前序和中序还原二叉树
+// // 前序遍历对的第一个元素pre[0]，是当前树的跟节点root，根据pre[0]可以将中序遍历结果min分割成两部分left、right，分别是以root为根节点的左右子树，递归这个过程。
 void construct(TreeNode* root,vector<int>& preorder, vector<int>& inorder);
 TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+    if (preorder.size() == 0) {
+        return NULL;
+    }
     TreeNode *root = new TreeNode(preorder[0]);
     
     construct(root, preorder, inorder);
@@ -385,11 +390,13 @@ TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
 void construct(TreeNode* root,vector<int>& preorder, vector<int>& inorder){
     vector<int> inOrderleft,inOrderright;
     bool beforeRoot = true;
+    // 每次都从0开始找效率较低，可以把上一次递归的中序开始和结束位置传进来，从开始位置开始遍历
     for (int i = 0; i<inorder.size(); i++) {
         if (inorder[i] == root->val) {
             beforeRoot = false;
             continue;
         }
+        // 每次都产生新数组效率较低，可以用索引传进来来决定数组的开始和结束位置，不必分割数组
         if (beforeRoot) inOrderleft.push_back(inorder[i]);
         if (!beforeRoot) inOrderright.push_back(inorder[i]);
     }
@@ -406,3 +413,25 @@ void construct(TreeNode* root,vector<int>& preorder, vector<int>& inorder){
         construct(childR, preorderRight, inOrderright);
     }
 }
+// 一个好的解法，思路相同，参数不同，不需要分割数组
+/*
+ public TreeNode buildTree(int[] preorder, int[] inorder) {
+ return helper(0, 0, inorder.length - 1, preorder, inorder);
+ }
+ 
+ public TreeNode helper(int preStart, int inStart, int inEnd, int[] preorder, int[] inorder) {
+ if (preStart > preorder.length - 1 || inStart > inEnd) {
+ return null;
+ }
+ TreeNode root = new TreeNode(preorder[preStart]);
+ int inIndex = 0; // Index of current root in inorder
+ for (int i = inStart; i <= inEnd; i++) {
+ if (inorder[i] == root.val) {
+ inIndex = i;
+ }
+ }
+ root.left = helper(preStart + 1, inStart, inIndex - 1, preorder, inorder);
+ root.right = helper(preStart + inIndex - inStart + 1, inIndex + 1, inEnd, preorder, inorder);
+ return root;
+ }
+*/
