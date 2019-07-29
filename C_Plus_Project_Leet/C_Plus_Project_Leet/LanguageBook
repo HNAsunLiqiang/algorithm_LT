@@ -14,7 +14,10 @@ pq.pop();
 }
 }
 
-2、make_pair和priority_queue
+3、make_pair和priority_queue
 priority_queue<pair<int,int>> pq;
   //默认是大根堆，按a排序
 pq.push(make_pair(a, b));
+
+4、map中key是否存在 https://blog.csdn.net/u013095333/article/details/89322198
+用count方法：

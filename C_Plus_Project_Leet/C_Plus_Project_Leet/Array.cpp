@@ -927,7 +927,79 @@ vector<int> topKFrequent2(vector<int>& nums, int k) {
     return ans;
 }
 
+// 128. Longest Consecutive Sequence
 
+class unionConseSet{
+    unordered_map<int, int> start_length_map;
+    unordered_map<int, int> node_root_map;
+    
+    bool hasLeft(int key){
+        return node_root_map.count(key-1) != 0;
+    }
+    bool hasRight(int key){
+        return node_root_map.count(key+1) != 0;
+    }
+    bool hasCurrent(int key){
+        return node_root_map.count(key) != 0;
+    }
+    int conseLength(int key){
+        if (node_root_map.count(key) == 0) {
+            return 0;
+        }
+        return start_length_map[node_root_map[key]];
+    }
+    void insetKey(int key){
+        if (hasCurrent(key)) {
+            return;
+        }
+        bool left = hasLeft(key);
+        bool right = hasRight(key);
+        if (left && right) {
+            
+        }
+    }
+    
+    int findRoot(int key){
+        if (node_root_map[key] != key) {
+            node_root_map[key] = findRoot(node_root_map[key]);
+        }
+        return node_root_map[key];
+    }
+    
+    void unionConse(int a, int b){
+        int rootA = findRoot(a);
+        int rootB = findRoot(b);
+        if (rootA == rootB) {
+            return;
+        }
+        
+    }
+}
+
+int longestConsecutive(vector<int>& nums) {
+    unordered_map<int, int> start_length_map;
+    unordered_map<int, int> node_root_map;
+    int result = 0;
+    for (int value : nums) {
+        if (node_root_map.count(value-1) != 0) {
+            node_root_map[value] = node_root_map[value-1];
+        }else if (node_root_map.count(value+1) != 0) {
+            node_root_map[value] = node_root_map[value+1];
+        }
+        
+        if (node_root_map.count(value) != 0) {
+            if (value < ) {
+                <#statements#>
+            }
+            
+            start_length_map[node_root_map[value]] += 1;
+        }else {
+            node_root_map[value] = value;
+            start_length_map[value] = 1;
+        }
+    }
+    return result;
+}
 
 
 
