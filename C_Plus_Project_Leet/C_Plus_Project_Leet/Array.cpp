@@ -928,11 +928,14 @@ vector<int> topKFrequent2(vector<int>& nums, int k) {
 }
 
 // 128. Longest Consecutive Sequence
-
+// 并查集：把连续串的最小数当成串的标记节点。利用两个map ，一个存储当前数所在的集合，以连续串的最小数来标识一个结合。  另一个存储当前数为集合标记的size
 class unionConseSet{
+    // 存储以某个数为头的连续串长度
     unordered_map<int, int> start_length_map;
+    // 存储某个节点以哪个节点为头，当节点以它本身为头时，他自己是当前串的起始节点
     unordered_map<int, int> node_root_map;
-    
+
+public:
     bool hasLeft(int key){
         return node_root_map.count(key-1) != 0;
     }
@@ -942,65 +945,114 @@ class unionConseSet{
     bool hasCurrent(int key){
         return node_root_map.count(key) != 0;
     }
-    int conseLength(int key){
-        if (node_root_map.count(key) == 0) {
-            return 0;
-        }
-        return start_length_map[node_root_map[key]];
-    }
-    void insetKey(int key){
+//    int conseLength(int key){
+//        if (hasCurrent(key) == false) {
+//            return 0;
+//        }
+//        return start_length_map[findRoot(key)];
+//    }
+    
+    // 插入某个数到集合中，并返回次数所在的连续串长度
+    int insetKey(int key){
+        // 当前数在结合中，说明已经统计过，不重复统计
         if (hasCurrent(key)) {
-            return;
+            return 0;
         }
         bool left = hasLeft(key);
         bool right = hasRight(key);
+        int rootLeft = findRoot(key-1);
+        int rootRigt = findRoot(key+1);
+        // 当前数小一和大一的数都在结合中，需要合并左右串并把当前数字加入到合并的串中
         if (left && right) {
-            
+            unionConse(rootLeft, rootRigt);
+            start_length_map[rootLeft] += 1;
+            node_root_map[key] = rootLeft;
+            return start_length_map[rootLeft];
+        }else if (left){// 当前数小一的数都在结合中，把当前数加入到小一所在的串中
+            start_length_map[rootLeft] += 1;
+            node_root_map[key] = rootLeft;
+            return start_length_map[rootLeft];
+        }else if(right){// 当前数大一的数都在结合中，把当前数加入到大一所在的串中,并把这个串的头设为当前数
+            node_root_map[rootRigt] = key;
+            node_root_map[key] = key;
+            start_length_map[key] = 1 + start_length_map[rootRigt];
+            return start_length_map[key];
+        }else {// 左右都不在集合中，直接插入当前数
+            start_length_map[key] = 1;
+            node_root_map[key] = key;
+            return 1;
         }
     }
-    
+
     int findRoot(int key){
+        if (node_root_map.count(key) == 0) {
+            return 0;
+        }
         if (node_root_map[key] != key) {
             node_root_map[key] = findRoot(node_root_map[key]);
         }
         return node_root_map[key];
     }
-    
+
     void unionConse(int a, int b){
         int rootA = findRoot(a);
         int rootB = findRoot(b);
         if (rootA == rootB) {
             return;
         }
-        
+        start_length_map[rootA] += start_length_map[rootB];
+        node_root_map[rootB] = rootA;
     }
-}
+};
+
 
 int longestConsecutive(vector<int>& nums) {
     unordered_map<int, int> start_length_map;
     unordered_map<int, int> node_root_map;
     int result = 0;
+    unionConseSet set = unionConseSet();
     for (int value : nums) {
-        if (node_root_map.count(value-1) != 0) {
-            node_root_map[value] = node_root_map[value-1];
-        }else if (node_root_map.count(value+1) != 0) {
-            node_root_map[value] = node_root_map[value+1];
-        }
-        
-        if (node_root_map.count(value) != 0) {
-            if (value < ) {
-                <#statements#>
-            }
-            
-            start_length_map[node_root_map[value]] += 1;
-        }else {
-            node_root_map[value] = value;
-            start_length_map[value] = 1;
-        }
+        result = max(set.insetKey(value), result);
     }
     return result;
 }
-
+// 虽然看起来有多个for，实际上每个数只会访问2n次，所以复杂度为n
+// 将所有数装到map中，再次遍历数组，当遍历一个数a的时候，向下连续查找map中比a小的数有几个，并从map中删除。同理检查大的数。如果map中没有当前的数a，说明a在前面已经被删除了，不需要再统计。
+int longestConsecutive1(vector<int>& nums) {
+    if (nums.size() <= 1) return nums.size();
+    
+    unordered_map<int, bool> m;
+    for (auto num : nums) {
+        m[num] = true;
+    }
+    
+    int res = INT_MIN;
+    for (auto num : nums) {
+        if (m.find(num) != m.end()) {
+            int cnt = 1;
+            m.erase(num);
+            
+            int left = num - 1;
+            int right = num + 1;
+            while (m.find(left) != m.end()) {
+                cnt++;
+                m.erase(left);
+                left--;
+            }
+            
+            while (m.find(right) != m.end()) {
+                cnt++;
+                m.erase(right);
+                right++;
+            }
+            
+            res = max(res, cnt);
+        }
+    }
+    
+    return res;
+    
+}
 
 
 

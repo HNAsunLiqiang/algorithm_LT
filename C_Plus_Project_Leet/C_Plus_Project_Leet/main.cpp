@@ -14,6 +14,8 @@
 #include "AString.hpp"
 #include "Others.hpp"
 #include "Matrix.hpp"
+#include <unordered_map>
+
 int main(int argc, const char * argv[]) {
     // insert code here...
     
@@ -105,8 +107,12 @@ int main(int argc, const char * argv[]) {
 //    cout << "\n" ;
 //    cout << "v2 --" << v2 << endl;
     
-    vector<int> preorder = {3,9,20,15,7};
-    vector<int> inorder = {9,3,15,20,7};
+//    vector<int> preorder = {3,9,20,15,7};
+//    vector<int> inorder = {9,3,15,20,7};
+//
+//    buildTree(preorder, inorder);
     
-    buildTree(preorder, inorder);
+   vector<int> numbers = {100, 4, 200, 1, 3, 2};
+    longestConsecutive(numbers);
+    
 }
