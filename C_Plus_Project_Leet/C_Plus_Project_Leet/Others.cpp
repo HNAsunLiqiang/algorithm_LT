@@ -119,6 +119,26 @@ vector<string> letterCombinations(string digits) {
     return result;
 }
 
+// 326. Power of Three
+// 一个数是否是3的幂(是否是3的n次幂)
+bool isPowerOfThree(int n) {
+    if (n == 1) {
+        return true;
+    }
+    if (n/3.0 == 1) {
+        return true;
+    }
+    if (n/3.0 == 0) {
+        return false;
+    }
+    if (n%3 != 0) {
+        return false;
+    }
+    return isPowerOfThree(n/3.0);
+}
 
-
+bool isPowerOfThree1(int n) {
+    // 1162261467 is 3^19,  3^20 is bigger than int
+    return ( n>0 &&  1162261467%n==0);
+}
 

@@ -20,4 +20,8 @@ priority_queue<pair<int,int>> pq;
 pq.push(make_pair(a, b));
 
 4、map中key是否存在 https://blog.csdn.net/u013095333/article/details/89322198
-用count方法：
+用count方法：node_root_map.count(key) != 0
+
+5、初始化map
+
+map<int,int> a = {{1,2},{3,4}};

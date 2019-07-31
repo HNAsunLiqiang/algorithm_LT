@@ -928,6 +928,7 @@ vector<int> topKFrequent2(vector<int>& nums, int k) {
 }
 
 // 128. Longest Consecutive Sequence
+// 求数组内最长连续子数列
 // 并查集：把连续串的最小数当成串的标记节点。利用两个map ，一个存储当前数所在的集合，以连续串的最小数来标识一个结合。  另一个存储当前数为集合标记的size
 class unionConseSet{
     // 存储以某个数为头的连续串长度

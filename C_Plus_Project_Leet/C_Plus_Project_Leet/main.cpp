@@ -112,7 +112,9 @@ int main(int argc, const char * argv[]) {
 //
 //    buildTree(preorder, inorder);
     
-   vector<int> numbers = {100, 4, 200, 1, 3, 2};
-    longestConsecutive(numbers);
+//   vector<int> numbers = {100, 4, 200, 1, 3, 2};
+//    longestConsecutive(numbers);
+//
+//    float a = 3/3.0;
     
 }
