@@ -256,4 +256,12 @@ int lengthOfLongestSubstring1(string s) {
     return maxLen;
 }
 
+// 131. Palindrome Partitioning
+vector<vector<string>> partition(string s) {
+    return NULL;
+}
+
+void partitionProcess(string s,int begin,int c,vector<vector<string>>& result){
+    
+}
 
