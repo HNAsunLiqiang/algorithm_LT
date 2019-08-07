@@ -257,11 +257,36 @@ int lengthOfLongestSubstring1(string s) {
 }
 
 // 131. Palindrome Partitioning
+// 分割字符串成回文子串，找出所以可能的组合。
+// 回溯算法：利用深度搜索，从0~n，找出可能的解，到n时候收集这个解。当进行到x时，若不能满足解的条件，则回退到上一步，走另一条路，尝试是否有解。回退是用递归来实现的，通常回溯法是 递归+遍历。
+// 本题，当start==n，则说明此时有解，可以收集这个解。当从start来的i时候，此时如果是回文串，则收集这个串，并向下递归。因为从start开始的回文串不一定只有一个，所以当完成本次递归后，需要回退到上一步，这一步是在for循环中体现的。
+// 解：https://leetcode.com/problems/palindrome-partitioning/discuss/42101/C%2B%2B-backtracking
 vector<vector<string>> partition(string s) {
-    return NULL;
+    vector<vector<string>> result;
+    return result;
 }
 
-void partitionProcess(string s,int begin,int c,vector<vector<string>>& result){
-    
+bool isPalindrome(string& s, int l, int r) {
+    while (l < r) {
+        if (s[l++] != s[r--]) {
+            return false;
+        }
+    }
+    return true;
 }
+
+void partitionProcess(string& s,int start,vector<string>& temp,vector<vector<string>>& result){
+    if (start == s.length()) {
+        result.push_back(temp);
+        return;
+    }
+    for (int i = start; i < s.length(); i++) {
+        if (isPalindrome(s, start, i)) {
+            temp.push_back(s.substr(start,i-start+1));
+            partitionProcess(s, i+1, temp, result);
+            temp.pop_back();
+        }
+    }
+}
+
 
