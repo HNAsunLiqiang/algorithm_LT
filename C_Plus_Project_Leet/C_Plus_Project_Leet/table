@@ -16,3 +16,7 @@
 
 7-31 // 326. Power of Three
 // 一个数是否是3的幂(是否是3的n次幂)
+
+8-7 // 131. Palindrome Partitioning
+// 分割字符串成回文子串，找出所以可能的组合。
+

@@ -261,6 +261,7 @@ int lengthOfLongestSubstring1(string s) {
 // 回溯算法：利用深度搜索，从0~n，找出可能的解，到n时候收集这个解。当进行到x时，若不能满足解的条件，则回退到上一步，走另一条路，尝试是否有解。回退是用递归来实现的，通常回溯法是 递归+遍历。
 // 本题，当start==n，则说明此时有解，可以收集这个解。当从start来的i时候，此时如果是回文串，则收集这个串，并向下递归。因为从start开始的回文串不一定只有一个，所以当完成本次递归后，需要回退到上一步，这一步是在for循环中体现的。
 // 解：https://leetcode.com/problems/palindrome-partitioning/discuss/42101/C%2B%2B-backtracking
+// 回溯算法：https://blog.csdn.net/qq_38046510/article/details/80061767
 vector<vector<string>> partition(string s) {
     vector<vector<string>> result;
     return result;
