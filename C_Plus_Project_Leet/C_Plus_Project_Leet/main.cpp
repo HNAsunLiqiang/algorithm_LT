@@ -117,4 +117,7 @@ int main(int argc, const char * argv[]) {
 //
 //    float a = 3/3.0;
     
+    vector<int> caseA = {10,9,2,5,3,7,101,18};
+    
+    int res = lengthOfLIS(caseA);
 }

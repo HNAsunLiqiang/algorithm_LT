@@ -1055,8 +1055,25 @@ int longestConsecutive1(vector<int>& nums) {
     
 }
 
-
-
+// 300. Longest Increasing Subsequence
+// 求数组中最长的升序序列长度。
+// dp思想，f(i) = max(1,max(f(0),f(1)……f(i)))，复杂度为n^2
+// 以i位置为结尾的升序串长度等于 0~i-1 范围所有比i位置的数小的数的结尾的序列长度+1。
+int lengthOfLIS(vector<int>& nums) {
+    int result = 0;
+    vector<int> lengths(nums.size(),1);// 数据集合，用来存储以每个位置为结尾的最长升序序列长度
+    for (int i = 0; i < nums.size(); i++) {// 遍历数组
+        int maxi = 1;
+        for (int j = 0; j < i; j++) {// 遍历i以下的所有已收集的数据
+            if (nums[i] > nums[j]) {
+                maxi = max(maxi, lengths[j]+1);
+            }
+        }
+        lengths[i] = maxi;
+        result = max(result, lengths[i]);
+    }
+    return result;
+}
 
 
 
