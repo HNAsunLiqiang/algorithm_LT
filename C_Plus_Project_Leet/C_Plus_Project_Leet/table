@@ -20,3 +20,5 @@
 8-7 // 131. Palindrome Partitioning
 // 分割字符串成回文子串，找出所以可能的组合。
 
+9-5 // 300. Longest Increasing Subsequence
+// 求数组中最长的升序序列长度。
