@@ -1075,6 +1075,23 @@ int lengthOfLIS(vector<int>& nums) {
     return result;
 }
 
+// 162. Find Peak Element
+
+int findPeakProcess(vector<int>& nums,int index){
+    if (index == 0) {
+        if (nums[index] > nums[index+1]) {
+            return index;
+        }
+    }else if (index == nums.size()-1){
+        if (nums[index] > nums[index-1]) {
+            return index;
+        }
+    }
+}
+
+int findPeakElement(vector<int>& nums) {
+    
+}
 
 
 
