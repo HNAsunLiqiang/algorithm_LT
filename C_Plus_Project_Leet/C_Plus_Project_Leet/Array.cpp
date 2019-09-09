@@ -1076,21 +1076,20 @@ int lengthOfLIS(vector<int>& nums) {
 }
 
 // 162. Find Peak Element
-
-int findPeakProcess(vector<int>& nums,int index){
-    if (index == 0) {
-        if (nums[index] > nums[index+1]) {
-            return index;
-        }
-    }else if (index == nums.size()-1){
-        if (nums[index] > nums[index-1]) {
-            return index;
-        }
-    }
-}
+// 找出序列里的局部峰值，即比相邻数大的数,题设nums[i] ≠ nums[i+1]，nums[-1] = nums[n] = -∞。要求时间复杂度logn
+// 二分查找法：if nums[mid] < nums[mid+1] 那么mid右侧肯定出现至少一个升序序列，又因为nums[n] = -∞，所以右侧肯定出现局部峰值，所以left = mid+1。左侧同理。
 
 int findPeakElement(vector<int>& nums) {
-    
+    int left = 0,right = nums.size()-1;
+    while (left < right) {
+        int mid = left +(right-left)/2;
+        if (nums[mid] < nums[mid+1]) {
+            left = mid+1;
+        }else{
+            right = mid;
+        }
+    }
+    return right;
 }
 
 

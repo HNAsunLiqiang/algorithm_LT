@@ -22,3 +22,6 @@
 
 9-5 // 300. Longest Increasing Subsequence
 // 求数组中最长的升序序列长度。
+
+9- 9 // // 162. Find Peak Element
+// 找出序列里的局部峰值，即比相邻数大的数。
