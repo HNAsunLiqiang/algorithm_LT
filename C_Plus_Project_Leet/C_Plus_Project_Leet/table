@@ -23,5 +23,8 @@
 9-5 // 300. Longest Increasing Subsequence
 // 求数组中最长的升序序列长度。
 
-9- 9 // // 162. Find Peak Element
+9- 9 // 162. Find Peak Element
 // 找出序列里的局部峰值，即比相邻数大的数。
+
+9-10 // 198. House Robber
+// 你是一个专业的强盗，计划在街上抢劫房屋。抢劫最大能抢金额问题，条件是不能抢相邻的房子。

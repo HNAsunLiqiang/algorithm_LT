@@ -1092,8 +1092,41 @@ int findPeakElement(vector<int>& nums) {
     return right;
 }
 
+// 198. House Robber
+// 你是一个专业的强盗，计划在街上抢劫房屋。 每个房子都有一定数量的钱存在，阻止你抢劫他们的唯一限制是相邻的房屋有连接的安全系统，如果两个相邻的房子在同一个晚上被打破，它将自动联系警察。
+// 不能抢相邻的房子。求能抢到的最大金额。
+// 方法1：递归，每个位置都有抢和不抢两种选择，if抢，那么去tn+2位置递归。if不抢 去n+1位置递归。
+void robHouse(vector<int>& nums,int &maxRobAmount, int curRobAmount,int robOnHouse){
+    if (robOnHouse >= nums.size()) {
+        maxRobAmount = max(maxRobAmount, curRobAmount);
+        return;
+    }
+    robHouse(nums, maxRobAmount, curRobAmount+nums[robOnHouse], robOnHouse+2);
+    robHouse(nums, maxRobAmount, curRobAmount, robOnHouse+1);
+}
 
-
+int rob(vector<int>& nums) {
+    int amount = 0;
+    robHouse(nums, amount, 0, 0);
+    return amount;
+}
+// dp
+// 动态规划，f(n) = max (f(n-2)+nums[n],f(n-1))
+// 求以每个位置结尾的最大抢劫金额。if抢当前，那么此时金额为f(n-2)（即跟他隔一个位置的最大金额）加上当前金额；if不抢当前 那么f(n-1)（可以取到之前的最后一个位置），当前最大为两者中的较大值。
+int rob_dp(vector<int>& nums) {
+    if (nums.size() == 0) {
+        return 0;
+    }
+    vector<int> amounts(nums.size(),0);
+    amounts[0] = nums[0];
+    int maxAmount = nums[0];
+    for (int i = 1; i<nums.size(); i++) {
+        int amount = max((i-2 >= 0?amounts[i-2]:0) +nums[i] , amounts[i-1]);
+        amounts[i] = amount;
+        maxAmount = max(amount, maxAmount);
+    }
+    return maxAmount;
+}
 
 
 
