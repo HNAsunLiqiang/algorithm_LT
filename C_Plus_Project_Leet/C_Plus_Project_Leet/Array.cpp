@@ -1128,6 +1128,22 @@ int rob_dp(vector<int>& nums) {
     return maxAmount;
 }
 
+// 334. Increasing Triplet Subsequence
+// 判断未排序数列中，是否有三个升序元素。要求时间复杂度n，空间复杂度1
+// 如果一个数左边的最小数min<num,右边最大的数max>num，那么返回true。但是此方法需要两个数组来存储到n位置位置的最大数和最小数。虽然时间复杂度为n，但是空间复杂度也为n。不满足要求。dp方法的时间复杂度n^2，也不满足n的要求。
+// 解法：设两个指针m,n。遍历数组，遍历过程中，m存最小的数，n存次小的数。可知如果nums[i]>n 那么此时一定有3位升序序列产生了。如果m > nums[i]，因为让m始终存储最小的数，前面的数小更利于产生升序序列，所以让m = nums[i]；如果m < nums[i] < n，让n = nums[i]，道理和上面一样。
+bool increasingTriplet(vector<int>& nums) {
+    int m = INT_MAX,n = INT_MAX;
+    for (int i = 0; i < nums.size(); i++) {
+        if (nums[i] > n) return true;
+        if (nums[i] < m) {
+            m = nums[i];
+        }else if (nums[i] > m){
+            n = nums[i];
+        }
+    }
+    return false;
+}
 
 
 
