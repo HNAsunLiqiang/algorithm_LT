@@ -13,5 +13,6 @@
 #include <vector>
 
 bool isValidSudoku(vector<vector<char>>& board);
+void setZeroes(vector<vector<int>>& matrix);
 
 #endif /* Matrix_hpp */

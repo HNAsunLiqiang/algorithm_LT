@@ -82,3 +82,38 @@ bool isValidSudoku(vector<vector<char>>& board) {
 //    }
 //    return true;
 //}
+
+
+// 73. Set Matrix Zeroes
+
+void setZerosInMartix(vector<vector<int>>& matrix,int ax,int ay,int bx,int by){
+    if (ax > bx || ay > by) {
+        return;
+    }
+    if (ax < 0 || ay < 0) {
+        return;
+    }
+    if (bx > matrix[0].size()-1 || by > matrix.size()-1) {
+        return;
+    }
+    
+    for (int i = ay; i <= by; i++) {
+        for (int j = ax; j <= bx; j++) {
+            if (matrix[i][j] == 0) {
+                for (int col = ax; col <= bx; col++) {
+                    matrix[i][col] = 0;
+                }
+                for (int row = ay; row <= by; row++) {
+                    matrix[row][j] = 0;
+                }
+                setZerosInMartix(matrix, ax, i+1, j-1, by);
+                setZerosInMartix(matrix, j+1, i+1, bx, by);
+                return;
+            }
+        }
+    }
+}
+
+void setZeroes(vector<vector<int>>& matrix) {
+    setZerosInMartix(matrix, 0, 0, matrix[0].size()-1, matrix.size()-1);
+}

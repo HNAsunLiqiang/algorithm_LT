@@ -117,7 +117,11 @@ int main(int argc, const char * argv[]) {
 //
 //    float a = 3/3.0;
     
-    vector<int> caseA = {2,7,9,3,1};
+    vector<vector<int>> caseA = {{0,1,2,0},
+        {3,4,5,2},
+        {1,3,1,5}};
     
-    int res = rob_dp(caseA);
+    
+    setZeroes(caseA);
+//    cout << "casea --" << caseA <<endl;
 }
