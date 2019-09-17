@@ -85,35 +85,60 @@ bool isValidSudoku(vector<vector<char>>& board) {
 
 
 // 73. Set Matrix Zeroes
+// 给一个m*n的矩阵，当某个元素为0时，设置它所在的行和列都为0。要求控件复杂度为常数
+// m+n空间复杂度的方法。准备两个数组mn，分别存某行/列是否存在0。
+// 常数时间复杂度的方法。利用第一行和第一列来作为记录数组。再记录前先遍历第一行和第一列判断是否存在0。
 
-void setZerosInMartix(vector<vector<int>>& matrix,int ax,int ay,int bx,int by){
-    if (ax > bx || ay > by) {
-        return;
-    }
-    if (ax < 0 || ay < 0) {
-        return;
-    }
-    if (bx > matrix[0].size()-1 || by > matrix.size()-1) {
-        return;
-    }
+void setZeroes(vector<vector<int>>& matrix) {
+//    setZerosInMartix(matrix, 0, 0, matrix[0].size()-1, matrix.size()-1);
     
-    for (int i = ay; i <= by; i++) {
-        for (int j = ax; j <= bx; j++) {
-            if (matrix[i][j] == 0) {
-                for (int col = ax; col <= bx; col++) {
-                    matrix[i][col] = 0;
-                }
-                for (int row = ay; row <= by; row++) {
-                    matrix[row][j] = 0;
-                }
-                setZerosInMartix(matrix, ax, i+1, j-1, by);
-                setZerosInMartix(matrix, j+1, i+1, bx, by);
-                return;
+    bool firtRowIsZero = false,firtColIsZero = false;
+    for (int c = 0; c < matrix[0].size(); c++) {
+        if(matrix[0][c] == 0) {
+            firtRowIsZero = true;
+            break;
+        }
+    }
+    for (int r = 0; r < matrix.size(); r++) {
+        if(matrix[r][0] == 0) {
+            firtColIsZero = true;
+            break;
+        }
+    }
+    for (int c = 1; c < matrix[0].size(); c++) {
+        for (int r = 1; r < matrix.size(); r++) {
+            if (matrix[r][c] == 0) {
+                matrix[0][c] = 0;
+                matrix[r][0] = 0;
             }
         }
     }
-}
-
-void setZeroes(vector<vector<int>>& matrix) {
-    setZerosInMartix(matrix, 0, 0, matrix[0].size()-1, matrix.size()-1);
+    for (int c = 1;  c < matrix[0].size(); c++) {
+        if (matrix[0][c] == 0) {
+            int r = 1;
+            while (r < matrix.size()) {
+                matrix[r][c] = 0;
+                r++;
+            }
+        }
+        if (firtRowIsZero) {
+            matrix[0][c] = 0;
+        }
+    }
+    for (int r = 1;  r < matrix.size(); r++) {
+        if (matrix[r][0] == 0) {
+            int c = 1;
+            while (c < matrix[0].size()) {
+                matrix[r][c] = 0;
+                c++;
+            }
+        }
+        if (firtColIsZero) {
+            matrix[r][0] = 0;
+        }
+    }
+    if (firtColIsZero || firtRowIsZero) {
+        matrix[0][0] = 0;
+    }
+    
 }
