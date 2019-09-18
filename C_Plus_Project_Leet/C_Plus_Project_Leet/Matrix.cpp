@@ -142,3 +142,26 @@ void setZeroes(vector<vector<int>>& matrix) {
     }
     
 }
+
+// 240. Search a 2D Matrix II
+// 行、列有序的矩阵中判断value是否存在。
+// 从左下或者右上开始遍历矩阵。
+// ，例如从左下。
+bool searchMatrix(vector<vector<int>>& matrix, int target) {
+    int rowCount = matrix.size();
+    if (rowCount == 0) return false;
+    int colCount = matrix[0].size();
+    
+    int row = rowCount-1 , col = 0;
+    
+    while (row >=0 && col < colCount) { //超出边界仍未找到则不存在这个value
+        if (matrix[row][col] == target) {
+            return true;
+        }else if (matrix[row][col] < target){ //当前数大于value，向右移动
+            col += 1;
+        }else{ //当前数大于value，向上移动
+            row -= 1;
+        }
+    }
+    return false;
+}
