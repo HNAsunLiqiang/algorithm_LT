@@ -15,4 +15,5 @@
 int strStr(string haystack, string needle) ;
 string longestPalindrome(string s);
 int lengthOfLongestSubstring(string s) ;
+int longestSubstring(string s, int k);
 #endif /* AString_hpp */

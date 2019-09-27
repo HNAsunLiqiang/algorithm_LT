@@ -11,6 +11,7 @@ using namespace std;
 
 #include <vector>
 #include <unordered_map>
+#include <algorithm>
 
 vector<int> getNext(string str) {
     vector<int> next;
@@ -291,3 +292,27 @@ void partitionProcess(string& s,int start,vector<string>& temp,vector<vector<str
 }
 
 
+// 395. Longest Substring with At Least K Repeating Characters
+int longestSubstring(string s, int k) {
+    int n = s.size() , i = 0;
+    
+    int max = 0;
+    while (i+k <=  n) {
+        vector<int> m(26,0);
+        int mask = 0, max_idx = i;
+        for (int j = i; j < n; j++) {
+            int t = s[j] - 'a';
+            m[t] += 1;
+            if (m[t] < k) {
+                mask |= 1 << (t);
+            }else{
+                mask &= ~(1 << t);
+            }
+            if (mask == 0) {
+//                max = std::__1::max(<#const _Tp &__a#>, <#const _Tp &__b#>, <#_Compare __comp#>)
+            }
+        }
+        i = max_idx +1;
+    }
+    return max;
+}
