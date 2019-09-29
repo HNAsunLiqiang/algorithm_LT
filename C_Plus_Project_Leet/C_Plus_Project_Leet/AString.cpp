@@ -9,9 +9,11 @@ using namespace std;
 
 #include "AString.hpp"
 
+#include <queue>
 #include <vector>
 #include <unordered_map>
 #include <algorithm>
+
 
 vector<int> getNext(string str) {
     vector<int> next;
@@ -293,26 +295,29 @@ void partitionProcess(string& s,int start,vector<string>& temp,vector<vector<str
 
 
 // 395. Longest Substring with At Least K Repeating Characters
+// 找字母至少出行k次的最长的子串长度。
 int longestSubstring(string s, int k) {
     int n = s.size() , i = 0;
-    
-    int max = 0;
-    while (i+k <=  n) {
-        vector<int> m(26,0);
-        int mask = 0, max_idx = i;
-        for (int j = i; j < n; j++) {
+    int maxL = 0;
+    while (i+k <=  n) { //可以理解为遍历以第i个位置为起点的子串
+        vector<int> m(26,0);// 标记26个字母，每个字母出现的次数
+        int mask = 0, max_idx = i;// mask int有32位，字母有26个所以可以用二进制位来记录每个位置是否超过了k个，超过则设置为0
+        for (int j = i; j < n; j++) {// 从第i位置向后找子串
             int t = s[j] - 'a';
-            m[t] += 1;
-            if (m[t] < k) {
-                mask |= 1 << (t);
-            }else{
+            m[t] += 1;// 遍历到的字母次数+1
+            if (m[t] < k) {// 不足k，当前位置置1
+                mask |= (1 << t);
+            }else{// 足k，当前位置置0
                 mask &= ~(1 << t);
             }
-            if (mask == 0) {
-//                max = std::__1::max(<#const _Tp &__a#>, <#const _Tp &__b#>, <#_Compare __comp#>)
+            if (mask == 0) {// mask为0，说明所有字母次数都有k次
+                maxL = max(maxL, j-i+1);
+                max_idx = j;// 记录遍历的位置
             }
         }
+        // 如果0~3满足条件，0~4不满足，那么1~4、2~4一定也不满足条件，所以i直接跳到4。
+        // 原因：因为0~3满足条件,1~3的字母数量肯定小于0~3，所以0~4不满足条件，那么1~4更加不能满足条件。
         i = max_idx +1;
     }
-    return max;
+    return maxL;
 }

@@ -124,5 +124,5 @@ int main(int argc, const char * argv[]) {
     setZeroes(caseA);
 //    cout << "casea --" << caseA <<endl;
     
-    longestSubstring("bcde", 2);
+    longestSubstring("aaade", 2);
 }
