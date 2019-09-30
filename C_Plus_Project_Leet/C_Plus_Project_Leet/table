@@ -37,3 +37,6 @@
 
 // 240. Search a 2D Matrix II
 // 行、列有序的矩阵中判断value是否存在。
+
+// 395. Longest Substring with At Least K Repeating Characters
+// 找字母至少出行k次的最长的子串长度。
