@@ -451,3 +451,24 @@ TreeNode* mergeTrees(TreeNode* t1, TreeNode* t2) {
     t1->right = mergeTrees(t1->right, t2->right);
     return t1;
 }
+
+// 226. 翻转二叉树
+// 递归每个节点使其左右结点交换即可，不要陷入到每层去左右交换的误区里。
+TreeNode* invertTree(TreeNode* root) {
+    if (root == NULL) return NULL;
+    TreeNode *temp = root->left;
+    root->left = root->right;
+    root->right = temp;
+    root->right = invertTree(root->left);
+    root->left = invertTree(root->right);
+    return root;
+    
+    /*
+     未产生中间节点，利用了返回的结点，比上面方法更优。
+    TreeNode right = invertTree(root.right);
+    TreeNode left = invertTree(root.left);
+    root.left = right;
+    root.right = left;
+    return root;
+    */
+}
