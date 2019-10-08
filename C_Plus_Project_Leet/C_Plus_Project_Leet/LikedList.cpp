@@ -125,3 +125,45 @@ ListNode* removeNthFromEnd(ListNode* head, int n) {
     pre->next = pre->next->next;
     return head;
 }
+// 234. Palindrome Linked List
+// 判断单链表是否是回文结构
+bool isPalindrome(ListNode* head) {
+    if (head == nullptr || head->next == nullptr) {
+        return true;
+    }
+    ListNode *n1 = head,*n2 = head;
+    while (n2->next != nullptr && n2->next->next != nullptr) {
+        n2 = n2->next->next;
+        n1 = n1->next;
+    }
+    n2 = n1->next;// n2 to right part first node
+    n1->next = nullptr;//mid.next -> null
+    ListNode *n3 ;
+    while (n2 != nullptr) {// convert right part
+        n3 = n2->next;
+        n2->next = n1;
+        n1 = n2;
+        n2 = n3;
+    }
+    n3 = n1; // save last node
+    n2 = head;// left first node
+    bool result = true;
+    while (n2 != nullptr && n1 != nullptr) { //check palindrome
+        if (n2->val != n1->val) {
+            result = false;
+            break;
+        }
+        n2 = n2->next;
+        n1 = n1->next;
+    }
+    n2 = n3->next;
+    n3->next = nullptr;
+    while (n2 != nullptr) {// recover list
+        n1 = n2->next;
+        n2->next = n3;
+        n3 = n2;
+        n2 = n1;
+    }
+    
+    return result;
+}
