@@ -28,4 +28,5 @@ int longestConsecutive(vector<int>& nums) ;
 int lengthOfLIS(vector<int>& nums) ;
 int rob(vector<int>& nums) ;
 int rob_dp(vector<int>& nums) ;
+int findUnsortedSubarray(vector<int>& nums) ;
 #endif /* Array_hpp */

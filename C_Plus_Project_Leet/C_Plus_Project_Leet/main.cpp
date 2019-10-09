@@ -112,17 +112,20 @@ int main(int argc, const char * argv[]) {
 //
 //    buildTree(preorder, inorder);
     
-//   vector<int> numbers = {100, 4, 200, 1, 3, 2};
+   vector<int> numbers = {2, 6, 4, 8, 10, 9, 15};
 //    longestConsecutive(numbers);
 //
 //    float a = 3/3.0;
+//
+//    vector<vector<int>> caseA = {{1},
+//        {0}};
     
-    vector<vector<int>> caseA = {{1},
-        {0}};
     
-    
-    setZeroes(caseA);
+//    setZeroes(caseA);
 //    cout << "casea --" << caseA <<endl;
     
-    longestSubstring("aaade", 2);
+//    longestSubstring("aaade", 2);
+    
+    findUnsortedSubarray(numbers);
+    
 }

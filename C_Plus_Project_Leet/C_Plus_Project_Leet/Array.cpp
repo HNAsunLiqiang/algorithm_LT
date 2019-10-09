@@ -1144,10 +1144,42 @@ bool increasingTriplet(vector<int>& nums) {
     }
     return false;
 }
-
-
-
-
+// 581. Shortest Unsorted Continuous Subarray
+// 给定一个整数数组，您需要找到一个连续的子数组，如果您仅将该子数组按升序排序，那么整个数组也将按升序排序。返回子串的长度
+// 升序序列，如果一个数n需要被调整位置，那么n肯定比他之前的数的最大值小，正序遍历来找需要调整的最右的数。同理逆序遍历可以找到最左的数。
+// 同样是遍历n次，所以两次遍历可以合并成一次。i 和 n-1-i为两端的数。
+int findUnsortedSubarray(vector<int>& nums) {
+    if (nums.size() == 1) {
+        return 0;
+    }
+    int n = nums.size(), subLeft = -1,subRight = nums.size()-1,max = nums[0],min = nums[n-1];
+    for (int i = 1 ; i < nums.size(); i++) {
+        if (nums[i] < max) {
+            subRight = i;
+        }else{
+            max = nums[i];
+        }
+    }
+    for (int j = nums.size()-2 ; j >= 0; j--) {
+        if (nums[j] > min) {
+            subLeft = j;
+        }else{
+            min = nums[j];
+        }
+    }
+    return subLeft == -1 ? 0 : subRight-subLeft+1;
+    
+    /*
+     int n = A.length, beg = -1, end = -2, min = A[n-1], max = A[0];
+     for (int i=1;i<n;i++) {
+     max = Math.max(max, A[i]);
+     min = Math.min(min, A[n-1-i]);
+     if (A[i] < max) end = i;
+     if (A[n-1-i] > min) beg = n-1-i;
+     }
+     return end - beg + 1;
+     */
+}
 
 
 
