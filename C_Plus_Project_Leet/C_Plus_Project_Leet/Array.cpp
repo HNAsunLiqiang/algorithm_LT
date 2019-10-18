@@ -1181,7 +1181,61 @@ int findUnsortedSubarray(vector<int>& nums) {
      */
 }
 
+bool aimProcess(int targetSum,int currentSum,vector<int>& nums,int currentIndex){
+    if (currentIndex == nums.size()) {
+        return false;
+    }
+    if (currentSum > targetSum) {
+        return false;
+    }
+    if (currentSum == targetSum) {
+        return true;
+    }
+    return aimProcess(targetSum, currentSum, nums, currentIndex+1) || aimProcess(targetSum, currentSum+nums[currentIndex], nums, currentIndex+1);
+    
+}
 
+// 416. Partition Equal Subset Sum
+bool canPartition(vector<int>& nums) {
+//    int sum = 0;
+//    for (int i = 0; i < nums.size(); i++) {
+//        sum += nums[i];
+//    }
+//
+//    if (sum%2 != 0) {
+//        return false;
+//    }
+//    return aimProcess(sum/2, 0, nums, 0);
+    
+    // dp[i][j] = dp[i-1][j-nums[i] || dp[i-1][j]
+    int sum = 0;
+    for (int i = 0; i < nums.size(); i++) {
+        sum += nums[i];
+    }
+    if (sum%2 != 0) {
+        return false;
+    }
+    int row = sum/2+1,col = nums.size()+1;
+    int dp[row][col];
+    memset(dp, 0, sizeof(dp));
+    
+    for (int i = 0; i < col; i++) {
+        dp[0][i] = 1;
+    }
+    for (int j = 0; j <  row; j++) {
+        dp[j][0] = 0;
+    }
+    
+    for (int i = 1; i<col; i++) {
+        for (int j = 1; j<row; j++) {
+            dp [i][i] = dp[j-1][i];
+            if (nums[i-1] <= j) {
+                dp[j][i] |= dp[i-1][j-nums[i-1]];
+            }
+        }
+    }
+    return dp[row-1][col-1] == 1;
+}
 
 
 

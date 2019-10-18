@@ -112,7 +112,7 @@ int main(int argc, const char * argv[]) {
 //
 //    buildTree(preorder, inorder);
     
-   vector<int> numbers = {2, 6, 4, 8, 10, 9, 15};
+   vector<int> numbers = {1,5,11,5};
 //    longestConsecutive(numbers);
 //
 //    float a = 3/3.0;
@@ -126,6 +126,8 @@ int main(int argc, const char * argv[]) {
     
 //    longestSubstring("aaade", 2);
     
-    findUnsortedSubarray(numbers);
+//    findUnsortedSubarray(numbers);
+    
+    bool res = canPartition(numbers);
     
 }

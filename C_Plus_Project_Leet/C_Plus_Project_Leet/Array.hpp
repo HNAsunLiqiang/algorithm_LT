@@ -29,4 +29,5 @@ int lengthOfLIS(vector<int>& nums) ;
 int rob(vector<int>& nums) ;
 int rob_dp(vector<int>& nums) ;
 int findUnsortedSubarray(vector<int>& nums) ;
+bool canPartition(vector<int>& nums) ;
 #endif /* Array_hpp */
