@@ -1237,6 +1237,12 @@ bool canPartition(vector<int>& nums) {
     return dp[row-1][col-1] == 1;
 }
 
+// 118. Pascal's Triangle
+vector<vector<int>> generate(int numRows) {
+    
+}
+
+
 
 
 
