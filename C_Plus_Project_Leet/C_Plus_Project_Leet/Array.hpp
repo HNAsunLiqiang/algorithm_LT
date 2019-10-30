@@ -30,4 +30,6 @@ int rob(vector<int>& nums) ;
 int rob_dp(vector<int>& nums) ;
 int findUnsortedSubarray(vector<int>& nums) ;
 bool canPartition(vector<int>& nums) ;
+vector<vector<int>> generate(int numRows) ;
+
 #endif /* Array_hpp */

@@ -1237,11 +1237,47 @@ bool canPartition(vector<int>& nums) {
     return dp[row-1][col-1] == 1;
 }
 
-// 118. Pascal's Triangle
+// 118. Pascal's Triangle 构建杨辉三角
+// for循环就可以了
 vector<vector<int>> generate(int numRows) {
+    if (numRows < 1) {
+        return {} ;
+    }
     
+    vector<vector<int>> res1(numRows);
+    
+    vector<vector<int>> res = {{1}} ;
+    for (int i = 1 ; i < numRows; i++) {
+        vector<int> lastRow = res.back();
+        vector<int> currentRow ;
+        for (int i = 0; i<lastRow.size(); i++) {
+            if (i == 0) {
+                currentRow.push_back(lastRow[0]);
+            }else{
+                currentRow.push_back(lastRow[i]+lastRow[i-1]);
+            }
+            if (i == lastRow.size()-1) {
+                currentRow.push_back(lastRow[lastRow.size()-1]);
+            }
+        }
+        res.push_back(currentRow);
+    }
+    return res;
 }
 
+//vector<vector<int> > generate(int numRows) {
+//    vector<vector<int>> r(numRows);
+//
+//    for (int i = 0; i < numRows; i++) {
+//        r[i].resize(i + 1);
+//        r[i][0] = r[i][i] = 1;
+//
+//        for (int j = 1; j < i; j++)
+//            r[i][j] = r[i - 1][j - 1] + r[i - 1][j];
+//    }
+//
+//    return r;
+//}
 
 
 

@@ -51,3 +51,6 @@
 
 // 10-9 581. Shortest Unsorted Continuous Subarray
 // 给定一个整数数组，您需要找到一个连续的子数组，如果您仅将该子数组按升序排序，那么整个数组也将按升序排序。返回子串的长度
+
+// 10.30 // 118. Pascal's Triangle
+// 构建杨辉三角

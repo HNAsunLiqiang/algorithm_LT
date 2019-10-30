@@ -128,6 +128,8 @@ int main(int argc, const char * argv[]) {
     
 //    findUnsortedSubarray(numbers);
     
-    bool res = canPartition(numbers);
+//    bool res = canPartition(numbers);
+    
+    generate(3);
     
 }
