@@ -146,3 +146,15 @@ bool isPowerOfThree1(int n) {
 //int trailingZeroes(int n) {
 //    
 //}
+
+
+// 461. 汉明距离
+int hammingDistance(int x, int y) {
+    
+    for (int i = 0; i < 32; i++) {
+        int bit = 1 << i;
+        bit &= x;
+        bit &= y;
+    }
+    
+}
