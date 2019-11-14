@@ -112,7 +112,7 @@ int main(int argc, const char * argv[]) {
 //
 //    buildTree(preorder, inorder);
     
-   vector<int> numbers = {1,5,11,5};
+   vector<int> numbers = {-10,-3,0,5,9};
 //    longestConsecutive(numbers);
 //
 //    float a = 3/3.0;
@@ -130,6 +130,6 @@ int main(int argc, const char * argv[]) {
     
 //    bool res = canPartition(numbers);
     
-    generate(3);
+    sortedArrayToBST(numbers);
     
 }

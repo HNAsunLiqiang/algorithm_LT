@@ -150,11 +150,13 @@ bool isPowerOfThree1(int n) {
 
 // 461. 汉明距离
 int hammingDistance(int x, int y) {
-    
-    for (int i = 0; i < 32; i++) {
-        int bit = 1 << i;
-        bit &= x;
-        bit &= y;
+    int cnt = 0;
+    int z = x^y;
+    while (z != 0) {
+        if ((z&(0x01)) != 0) {
+            cnt ++;
+        }
+        z >> 1;
     }
-    
+    return cnt;
 }

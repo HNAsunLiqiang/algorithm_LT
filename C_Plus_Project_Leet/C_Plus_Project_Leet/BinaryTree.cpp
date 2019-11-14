@@ -472,3 +472,36 @@ TreeNode* invertTree(TreeNode* root) {
     return root;
     */
 }
+
+// 108. Convert Sorted Array to Binary Search Tree
+// 将有序数组转换成平衡搜索二叉树。
+// 因为数组是从小到大的，而搜索树左子树<当前节点<右子树，所以可以将数组等分成两份来实现平衡，中位数mid作为当前跟节点，则满足搜索树的性质，递归这个过程。
+TreeNode* rootWith(vector<int>& nums, int l, int r) {
+    
+    if (l <= r) {
+        int mid = (l+r)/2;
+        TreeNode *node =  new TreeNode(nums[mid]);
+        node->left = rootWith(nums, l, mid-1);
+        node->right = rootWith(nums, mid+1, r);
+        return node;
+    }
+    
+    return NULL;
+//    if (l == r) {
+//        TreeNode *node =  new TreeNode(nums[r]);
+//        return node;
+//    }else if (l < r){
+//        int mid = (r+l)/2;
+//        TreeNode *node =  new TreeNode(nums[mid]);
+//        node->left = rootWith(nums, l, mid-1);
+//        node->right = rootWith(nums, mid+1, r);
+//        return node;
+//    }
+//
+//    return NULL;
+}
+TreeNode* sortedArrayToBST(vector<int>& nums) {
+    return rootWith(nums,0,nums.size()-1);
+}
+
+

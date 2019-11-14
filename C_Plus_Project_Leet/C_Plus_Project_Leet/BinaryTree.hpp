@@ -23,5 +23,6 @@
 //TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) ;
 
 TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) ;
+TreeNode* sortedArrayToBST(vector<int>& nums) ;
 
 #endif /* BinaryTree_hpp */
